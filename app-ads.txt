@@ -1,2 +1,1 @@
-# AdMob Publisher ID buraya eklenecek
-# Örnek: google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-5363099307374159, DIRECT, f08c47fec0942fa0
