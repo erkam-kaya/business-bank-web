@@ -30,7 +30,7 @@
 
   <!-- Stylesheet -->
   <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
-  <link rel="stylesheet" href="assets/css/style.css?v=3.1.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.2.0">
 </head>
 <body>
 
@@ -484,250 +484,63 @@
   <section class="fleet-section" id="fleet">
     <div class="container">
       <div class="section-head">
-        <div class="section-tag">Otonom Filo & Garaj</div>
+        <div class="section-tag">Otonom Filo &amp; Garaj</div>
         <h2 class="section-title">Gerçek Oyun İçi Araç Showroom'u</h2>
         <p class="section-desc">
           Kazandığın sermayeyle sarı taksiden lüks makam araçlarına kadar 15 farklı modelle şehrin ulaşım ağını ele geçir.
         </p>
       </div>
 
-      <!-- Fleet Category Tabs & Carousel Nav -->
-      <div class="carousel-top-bar">
-        <div class="carousel-tabs" id="fleetTabs">
-          <button class="tab-filter-btn active" data-filter="all">Tüm Modeller (15)</button>
-          <button class="tab-filter-btn" data-filter="ekonomi">Ekonomi (4)</button>
-          <button class="tab-filter-btn" data-filter="isletme">İşletme (4)</button>
-          <button class="tab-filter-btn" data-filter="vip">VIP Sınıfı (4)</button>
-          <button class="tab-filter-btn" data-filter="sovereign">Sovereign &amp; Zirve (3)</button>
-        </div>
-        <div class="carousel-nav-arrows">
-          <button class="carousel-arrow-btn" id="fleetPrevBtn" aria-label="Önceki Araç">❮</button>
-          <button class="carousel-arrow-btn" id="fleetNextBtn" aria-label="Sonraki Araç">❯</button>
-        </div>
-      </div>
-
-      <div class="fleet-carousel-track" id="fleetTrack">
-        <!-- 1. Fiat Egea -->
-        <div class="car-card" data-category="ekonomi">
-          <span class="car-class-badge">Ekonomi Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/egea.png" alt="2024 Fiat Egea Sedan" loading="lazy">
+      <!-- Sleek Glassmorphic Showcase Widget (Single Featured Car View) -->
+      <div class="showcase-hub-widget">
+        <!-- Widget Top Controls -->
+        <div class="widget-header-bar">
+          <div class="widget-pill-tabs" id="fleetTabs">
+            <button class="widget-tab active" data-index="0">Fiat Egea</button>
+            <button class="widget-tab" data-index="4">VW Passat</button>
+            <button class="widget-tab" data-index="9">BMW 7 Serisi</button>
+            <button class="widget-tab" data-index="12">Bentley Flying</button>
+            <button class="widget-tab" data-index="14">Sovereign S1</button>
           </div>
-          <div>
-            <div class="car-name">2024 Fiat Egea Sedan</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$15,000</span></div>
-              <div>Getiri: <span class="car-rent">+$110 / saat</span></div>
-            </div>
+
+          <div class="widget-actions">
+            <button class="widget-nav-arrow" id="fleetPrevBtn" aria-label="Önceki Model">❮</button>
+            <span class="widget-counter" id="fleetCounter">1 / 15</span>
+            <button class="widget-nav-arrow" id="fleetNextBtn" aria-label="Sonraki Model">❯</button>
           </div>
         </div>
 
-        <!-- 2. Megane E-Tech -->
-        <div class="car-card" data-category="ekonomi">
-          <span class="car-class-badge">Ekonomi Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/meganeetech.png" alt="Renault Megane E-Tech" loading="lazy">
+        <!-- Single Active Vehicle Spotlight -->
+        <div class="spotlight-card" id="carSpotlight">
+          <div class="spotlight-visual-wrap">
+            <span class="spotlight-badge" id="carClassBadge">Ekonomi Sınıfı</span>
+            <img src="assets/img/cars/egea.png" alt="2024 Fiat Egea Sedan" id="carImg" class="spotlight-img">
           </div>
-          <div>
-            <div class="car-name">Renault Megane E-Tech</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$22,000</span></div>
-              <div>Getiri: <span class="car-rent">+$180 / saat</span></div>
-            </div>
-          </div>
-        </div>
 
-        <!-- 3. Skoda Superb -->
-        <div class="car-card" data-category="ekonomi">
-          <span class="car-class-badge">Ekonomi Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/superb.png" alt="Skoda Superb" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Skoda Superb</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$35,000</span></div>
-              <div>Getiri: <span class="car-rent">+$290 / saat</span></div>
-            </div>
-          </div>
-        </div>
+          <div class="spotlight-details">
+            <div class="spotlight-sub-id" id="carSubId">GARAJ MODELİ #01</div>
+            <h3 class="spotlight-title" id="carName">2024 Fiat Egea Sedan</h3>
+            <p class="spotlight-desc" id="carDesc">
+              Şehir içi taksi ağını başlatmak için en ideal, düşük maliyetli ve dayanıklı başlangıç aracı.
+            </p>
 
-        <!-- 4. Toyota Camry -->
-        <div class="car-card" data-category="ekonomi">
-          <span class="car-class-badge">Ekonomi Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/camry.png" alt="Toyota Camry (Hybrid)" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Toyota Camry (Hybrid)</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$42,000</span></div>
-              <div>Getiri: <span class="car-rent">+$360 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Passat Elegance -->
-        <div class="car-card" data-category="isletme">
-          <span class="car-class-badge">İşletme Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/passatelegance.png" alt="Volkswagen Passat Elegance" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">VW Passat Elegance</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$65,000</span></div>
-              <div>Getiri: <span class="car-rent">+$550 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. Audi A6 -->
-        <div class="car-card" data-category="isletme">
-          <span class="car-class-badge">İşletme Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/audia6.png" alt="Audi A6" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Audi A6</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$85,000</span></div>
-              <div>Getiri: <span class="car-rent">+$780 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7. BMW 5 Series -->
-        <div class="car-card" data-category="isletme">
-          <span class="car-class-badge">İşletme Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/bmw5serie.png" alt="BMW 5 Series" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">BMW 5 Series</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$105,000</span></div>
-              <div>Getiri: <span class="car-rent">+$980 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8. Mercedes E-Class -->
-        <div class="car-card" data-category="isletme">
-          <span class="car-class-badge">İşletme Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/eclass.png" alt="Mercedes E-Class" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Mercedes E-Class</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$120,000</span></div>
-              <div>Getiri: <span class="car-rent">+$1,150 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 9. Porsche Panamera -->
-        <div class="car-card" data-category="vip">
-          <span class="car-class-badge">VIP Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/panamera.png" alt="Porsche Panamera" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Porsche Panamera</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$210,000</span></div>
-              <div>Getiri: <span class="car-rent">+$2,200 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 10. BMW 7 Series -->
-        <div class="car-card" data-category="vip">
-          <span class="car-class-badge">VIP Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/bmw7serie.png" alt="BMW 7 Series" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">BMW 7 Series</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$250,000</span></div>
-              <div>Getiri: <span class="car-rent">+$2,800 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 11. Mercedes S-Class -->
-        <div class="car-card" data-category="vip">
-          <span class="car-class-badge">VIP Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/sclass.png" alt="Mercedes S-Class" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Mercedes S-Class</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$280,000</span></div>
-              <div>Getiri: <span class="car-rent">+$3,200 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 12. Range Rover Autobiography -->
-        <div class="car-card" data-category="vip">
-          <span class="car-class-badge">VIP Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/ranegroverautobiography.png" alt="Range Rover Autobiography" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Range Rover Autobiography</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$320,000</span></div>
-              <div>Getiri: <span class="car-rent">+$3,800 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 13. Bentley Flying Spur -->
-        <div class="car-card" data-category="sovereign">
-          <span class="car-class-badge" style="border-color: var(--gold-bright); color: var(--gold-bright);">Sovereign Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/bentleyflying.png" alt="Bentley Flying Spur" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Bentley Flying Spur</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$650,000</span></div>
-              <div>Getiri: <span class="car-rent">+$8,500 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 14. Rolls Royce Ghost -->
-        <div class="car-card" data-category="sovereign">
-          <span class="car-class-badge" style="border-color: var(--gold-bright); color: var(--gold-bright);">Sovereign Sınıfı</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/rolsroyceghost.png" alt="Rolls Royce Ghost" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Rolls Royce Ghost</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$900,000</span></div>
-              <div>Getiri: <span class="car-rent">+$12,500 / saat</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 15. Sovereign S1 (Custom) -->
-        <div class="car-card" data-category="sovereign" style="border-color: var(--primary-neon);">
-          <span class="car-class-badge" style="border-color: var(--primary-neon); color: var(--primary-neon);">Zirve Özel</span>
-          <div class="car-img-wrap">
-            <img src="assets/img/cars/executive_s1.png" alt="Sovereign S1 Custom" loading="lazy">
-          </div>
-          <div>
-            <div class="car-name">Sovereign S1 (Custom)</div>
-            <div class="car-stats-row">
-              <div>Fiyat: <span class="car-cost">$1,500,000</span></div>
-              <div>Getiri: <span class="car-rent">+$22,000 / saat</span></div>
+            <div class="spotlight-stats-grid">
+              <div class="spotlight-stat-box">
+                <span class="s-label">Araç Maliyeti</span>
+                <span class="s-value neon" id="carCost">$15,000</span>
+              </div>
+              <div class="spotlight-stat-box">
+                <span class="s-label">Saatlik Getiri</span>
+                <span class="s-value cyan" id="carRent">+$110 / saat</span>
+              </div>
+              <div class="spotlight-stat-box">
+                <span class="s-label">Kondisyon Ömrü</span>
+                <span class="s-value" id="carKm">500,000 km</span>
+              </div>
+              <div class="spotlight-stat-box">
+                <span class="s-label">Bakım Maliyeti</span>
+                <span class="s-value yellow" id="carMaint">$900</span>
+              </div>
             </div>
           </div>
         </div>
@@ -746,103 +559,76 @@
         </p>
       </div>
 
-      <!-- VIP Cards Category Tabs & Carousel Nav -->
-      <div class="carousel-top-bar">
-        <div class="carousel-tabs" id="vipTabs">
-          <button class="tab-filter-btn gold active" data-filter="all">Tüm Kartlar (5)</button>
-          <button class="tab-filter-btn gold" data-filter="level-1">Seviye 1 (Silver)</button>
-          <button class="tab-filter-btn gold" data-filter="level-2">Seviye 2 (Sapphire)</button>
-          <button class="tab-filter-btn gold" data-filter="level-3">Seviye 3 (Emerald)</button>
-          <button class="tab-filter-btn gold" data-filter="level-4">Seviye 4 (Amber)</button>
-          <button class="tab-filter-btn gold" data-filter="level-5">Seviye 5 (Black)</button>
-        </div>
-        <div class="carousel-nav-arrows">
-          <button class="carousel-arrow-btn gold" id="vipPrevBtn" aria-label="Önceki Kart">❮</button>
-          <button class="carousel-arrow-btn gold" id="vipNextBtn" aria-label="Sonraki Kart">❯</button>
-        </div>
-      </div>
+      <!-- Sleek Glassmorphic Showcase Widget (Single Featured VIP Card View) -->
+      <div class="showcase-hub-widget gold-theme">
+        <!-- Widget Top Controls -->
+        <div class="widget-header-bar gold">
+          <div class="widget-pill-tabs gold" id="vipTabs">
+            <button class="widget-tab gold active" data-index="0">Silver Ledger</button>
+            <button class="widget-tab gold" data-index="1">Sapphire Access</button>
+            <button class="widget-tab gold" data-index="2">Emerald Tier</button>
+            <button class="widget-tab gold" data-index="3">Amber Specialist</button>
+            <button class="widget-tab gold" data-index="4">Black Protocol</button>
+          </div>
 
-      <div class="vip-carousel-track" id="vipTrack">
-        <!-- Level 1 -->
-        <div class="ingame-card-item card-level-1" data-tier="level-1">
-          <div class="ic-top">
-            <span class="ic-level">SEVİYE 1</span>
-            <span class="ic-tier-badge">EXECUTIVE ELITE</span>
-          </div>
-          <div>
-            <div class="ic-name">SILVER LEDGER</div>
-            <div style="font-size: 0.72rem; color: #B9CBBB;">Başlangıç Kartı</div>
-          </div>
-          <div class="ic-bottom">
-            <div>Bonus: 1x</div>
-            <div>Gereken: $100</div>
+          <div class="widget-actions gold">
+            <button class="widget-nav-arrow gold" id="vipPrevBtn" aria-label="Önceki Kart">❮</button>
+            <span class="widget-counter gold" id="vipCounter">1 / 5</span>
+            <button class="widget-nav-arrow gold" id="vipNextBtn" aria-label="Sonraki Kart">❯</button>
           </div>
         </div>
 
-        <!-- Level 2 -->
-        <div class="ingame-card-item card-level-2" data-tier="level-2">
-          <div class="ic-top">
-            <span class="ic-level">SEVİYE 2</span>
-            <span class="ic-tier-badge">DIAMOND PRIVILEGE</span>
+        <!-- Single Active VIP Card Spotlight -->
+        <div class="vip-spotlight-card" id="vipSpotlight">
+          <!-- Physical In-Game Card Preview (Left) -->
+          <div class="vip-card-visual-col">
+            <div class="ingame-card-item card-level-1" id="vipCardPreview">
+              <div class="ic-top">
+                <span class="ic-level" id="vcLevel">SEVİYE 1</span>
+                <span class="ic-tier-badge" id="vcBadge">EXECUTIVE ELITE</span>
+              </div>
+              <div>
+                <div class="ic-name" id="vcName">SILVER LEDGER</div>
+                <div id="vcSub" style="font-size: 0.72rem; color: #B9CBBB;">Başlangıç Kartı</div>
+              </div>
+              <div class="ic-bottom">
+                <div id="vcBottomLeft">Bonus: 1x</div>
+                <div id="vcBottomRight">Gereken: $100</div>
+              </div>
+            </div>
           </div>
-          <div>
-            <div class="ic-name">SAPPHIRE ACCESS</div>
-            <div style="font-size: 0.72rem; color: #38bdf8;">Safir Kristal</div>
-          </div>
-          <div class="ic-bottom">
-            <div>Bonus: 2x</div>
-            <div>Gereken: $500</div>
-          </div>
-        </div>
 
-        <!-- Level 3 -->
-        <div class="ingame-card-item card-level-3" data-tier="level-3">
-          <div class="ic-top">
-            <span class="ic-level">SEVİYE 3</span>
-            <span class="ic-tier-badge">LEAF SOVEREIGN</span>
-          </div>
-          <div>
-            <div class="ic-name">EMERALD TIER</div>
-            <div style="font-size: 0.72rem; color: #00E383;">Zümrüt Yeşili</div>
-          </div>
-          <div class="ic-bottom">
-            <div>Bonus: 4x</div>
-            <div>Gereken: $2,500</div>
-          </div>
-        </div>
+          <!-- Card Details & Lore (Right) -->
+          <div class="spotlight-details">
+            <div class="spotlight-sub-id gold" id="vipTierTag">PRESTİJ KARTI • KADEME 1</div>
+            <h3 class="spotlight-title gold" id="vipTitle">Silver Ledger</h3>
+            <p class="spotlight-desc" id="vipDesc">
+              Her yeni girişimcinin finansal serüvenine başladığı temel hesap kartı. Dokundukça sermaye biriktirir, nakit akışının temel taşını oluşturur.
+            </p>
 
-        <!-- Level 4 -->
-        <div class="ingame-card-item card-level-4" data-tier="level-4">
-          <div class="ic-top">
-            <span class="ic-level">SEVİYE 4</span>
-            <span class="ic-tier-badge">LION STEWARD</span>
-          </div>
-          <div>
-            <div class="ic-name">AMBER SPECIALIST</div>
-            <div style="font-size: 0.72rem; color: #FFC640;">24K Altın Aslan</div>
-          </div>
-          <div class="ic-bottom">
-            <div>Bonus: 8x</div>
-            <div>Gereken: $10,000</div>
-          </div>
-        </div>
-
-        <!-- Level 5 -->
-        <div class="ingame-card-item card-level-5" data-tier="level-5">
-          <div class="ic-top">
-            <span class="ic-level" style="color: var(--primary-neon);">SEVİYE 5 • ZİRVE</span>
-            <span class="ic-tier-badge" style="color: var(--primary-neon);">SOVEREIGN BLACK</span>
-          </div>
-          <div>
-            <div class="ic-name" style="color: var(--primary-neon);">BLACK PROTOCOL</div>
-            <div style="font-size: 0.72rem; color: #fff;">Dünyanın Patronu</div>
-          </div>
-          <div class="ic-bottom" style="color: var(--primary-neon);">
-            <div>Bonus: 16x + IPO</div>
-            <div>Gereken: $50,000</div>
+            <div class="spotlight-stats-grid">
+              <div class="spotlight-stat-box">
+                <span class="s-label">Gelir Bonusu</span>
+                <span class="s-value gold" id="vipBonus">1x Çarpan</span>
+              </div>
+              <div class="spotlight-stat-box">
+                <span class="s-label">Gereken Bakiye</span>
+                <span class="s-value" id="vipReq">$100</span>
+              </div>
+              <div class="spotlight-stat-box">
+                <span class="s-label">Kredi Limiti</span>
+                <span class="s-value cyan" id="vipCredit">Bakiye x 2.0</span>
+              </div>
+              <div class="spotlight-stat-box">
+                <span class="s-label">Özel Ayrıcalık</span>
+                <span class="s-value neon" id="vipPerk">Temel Dokunma Gücü</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
     </div>
   </section>
 
@@ -1088,6 +874,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=3.2.0"></script>
 </body>
 </html>

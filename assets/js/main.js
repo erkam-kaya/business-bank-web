@@ -257,81 +257,271 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 7. Fleet Carousel & Category Filter
-  const fleetTabs = document.querySelectorAll('#fleetTabs .tab-filter-btn');
-  const fleetTrack = document.getElementById('fleetTrack');
+  // 7. SINGLE FEATURED VEHICLE SHOWROOM SPOTLIGHT (15 MODELS)
+  const FLEET_DATA = [
+    { id: '01', name: '2024 Fiat Egea Sedan', class: 'Ekonomi Sınıfı', cost: '$15,000', rent: '+$110 / saat', km: '500,000 km', maint: '$900', img: 'assets/img/cars/egea.png', desc: 'Şehir içi taksi ağını başlatmak için en ideal, düşük maliyetli ve dayanıklı başlangıç aracı.' },
+    { id: '02', name: 'Renault Megane E-Tech', class: 'Ekonomi Sınıfı', cost: '$22,000', rent: '+$180 / saat', km: '450,000 km', maint: '$1,200', img: 'assets/img/cars/meganeetech.png', desc: 'Elektrikli yeni nesil filolar için düşük yakıt/şarj maliyetli modern filo modeli.' },
+    { id: '03', name: 'Skoda Superb', class: 'Ekonomi Sınıfı', cost: '$35,000', rent: '+$290 / saat', km: '400,000 km', maint: '$1,800', img: 'assets/img/cars/superb.png', desc: 'Geniş arka diz mesafesiyle yolcu memnuniyetini ve saatlik taksi getirisini artıran tercih.' },
+    { id: '04', name: 'Toyota Camry (Hybrid)', class: 'Ekonomi Sınıfı', cost: '$42,000', rent: '+$360 / saat', km: '380,000 km', maint: '$2,200', img: 'assets/img/cars/camry.png', desc: 'Hibrit teknolojisiyle dur-kalk trafiğinde sıfır arıza riski sunan uzun ömürlü yatırım.' },
+    { id: '05', name: 'VW Passat Elegance', class: 'İşletme Sınıfı', cost: '$65,000', rent: '+$550 / saat', km: '350,000 km', maint: '$3,500', img: 'assets/img/cars/passatelegance.png', desc: 'Kurumsal transferlerin ve iş dünyasının vazgeçilmez filo standardı.' },
+    { id: '06', name: 'Audi A6', class: 'İşletme Sınıfı', cost: '$85,000', rent: '+$780 / saat', km: '320,000 km', maint: '$4,800', img: 'assets/img/cars/audia6.png', desc: 'Quattro teknolojisi ve lüks kokpitiyle kurumsal müşterilere özel yüksek primli taşımacılık.' },
+    { id: '07', name: 'BMW 5 Series', class: 'İşletme Sınıfı', cost: '$105,000', rent: '+$980 / saat', km: '300,000 km', maint: '$5,500', img: 'assets/img/cars/bmw5serie.png', desc: 'Sportif dinamizm ve kurumsal prestij sunan, saatlik getirisi yüksek iş makamı.' },
+    { id: '08', name: 'Mercedes E-Class', class: 'İşletme Sınıfı', cost: '$120,000', rent: '+$1,150 / saat', km: '280,000 km', maint: '$6,500', img: 'assets/img/cars/eclass.png', desc: 'Executive konfor ve sessiz kabin deneyimiyle işletme sınıfının lideri.' },
+    { id: '09', name: 'Porsche Panamera', class: 'VIP Sınıfı', cost: '$210,000', rent: '+$2,200 / saat', km: '250,000 km', maint: '$12,000', img: 'assets/img/cars/panamera.png', desc: 'Süper spor performansını 4 kapılı VIP konforuyla buluşturan elit tercih.' },
+    { id: '10', name: 'BMW 7 Series', class: 'VIP Sınıfı', cost: '$250,000', rent: '+$2,800 / saat', km: '240,000 km', maint: '$15,000', img: 'assets/img/cars/bmw7serie.png', desc: 'Tiyatro ekranı ve sinema konforu sunan makam aracıyla saatlik binlerce dolar getiri.' },
+    { id: '11', name: 'Mercedes S-Class', class: 'VIP Sınıfı', cost: '$280,000', rent: '+$3,200 / saat', km: '230,000 km', maint: '$18,000', img: 'assets/img/cars/sclass.png', desc: 'Dünya liderlerinin ve üst düzey patronların 1 numaralı lüks şoförlü aracı.' },
+    { id: '12', name: 'Range Rover Autobiography', class: 'VIP Sınıfı', cost: '$320,000', rent: '+$3,800 / saat', km: '220,000 km', maint: '$20,000', img: 'assets/img/cars/ranegroverautobiography.png', desc: 'Her türlü arazi ve şehir şartında en üst düzey VIP güvenlik ve konfor.' },
+    { id: '13', name: 'Bentley Flying Spur', class: 'Sovereign Sınıfı', cost: '$650,000', rent: '+$8,500 / saat', km: '200,000 km', maint: '$35,000', img: 'assets/img/cars/bentleyflying.png', desc: 'El yapımı ahşap ve deri kaplamalarla sadece milyarderlerin binebildiği şaheser.' },
+    { id: '14', name: 'Rolls Royce Ghost', class: 'Sovereign Sınıfı', cost: '$900,000', rent: '+$12,500 / saat', km: '180,000 km', maint: '$50,000', img: 'assets/img/cars/rolsroyceghost.png', desc: 'Yıldızlı tavan ve uçan halı süspansiyonu ile saatlik $12,500 net getiri canavarı.' },
+    { id: '15', name: 'Sovereign S1 (Custom)', class: 'Zirve Özel', cost: '$1,500,000', rent: '+$22,000 / saat', km: '150,000 km', maint: '$100,000', img: 'assets/img/cars/executive_s1.png', desc: 'Forbes 1. sırasındaki dünya liderine özel üretilen, zırhlı ve prototip zirve makinesi.' }
+  ];
+
+  let currentCarIndex = 0;
+  const carImg = document.getElementById('carImg');
+  const carClassBadge = document.getElementById('carClassBadge');
+  const carSubId = document.getElementById('carSubId');
+  const carName = document.getElementById('carName');
+  const carDesc = document.getElementById('carDesc');
+  const carCost = document.getElementById('carCost');
+  const carRent = document.getElementById('carRent');
+  const carKm = document.getElementById('carKm');
+  const carMaint = document.getElementById('carMaint');
+  const fleetCounter = document.getElementById('fleetCounter');
+  const fleetTabs = document.querySelectorAll('#fleetTabs .widget-tab');
   const fleetPrevBtn = document.getElementById('fleetPrevBtn');
   const fleetNextBtn = document.getElementById('fleetNextBtn');
 
-  if (fleetTabs && fleetTrack) {
-    fleetTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        fleetTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
+  function renderFleet(index) {
+    if (index < 0) index = FLEET_DATA.length - 1;
+    if (index >= FLEET_DATA.length) index = 0;
+    currentCarIndex = index;
+    const item = FLEET_DATA[index];
 
-        const filter = tab.getAttribute('data-filter');
-        const cars = fleetTrack.querySelectorAll('.car-card');
-
-        cars.forEach(car => {
-          if (filter === 'all' || car.getAttribute('data-category') === filter) {
-            car.classList.remove('hidden');
+    if (carImg) {
+      carImg.style.opacity = '0';
+      carImg.style.transform = 'scale(0.96)';
+      setTimeout(() => {
+        carImg.src = item.img;
+        carImg.alt = item.name;
+        if (carClassBadge) {
+          carClassBadge.textContent = item.class;
+          if (item.class === 'Zirve Özel') {
+            carClassBadge.style.borderColor = 'var(--primary-neon)';
+            carClassBadge.style.color = 'var(--primary-neon)';
+          } else if (item.class === 'Sovereign Sınıfı') {
+            carClassBadge.style.borderColor = 'var(--gold-bright)';
+            carClassBadge.style.color = 'var(--gold-bright)';
           } else {
-            car.classList.add('hidden');
+            carClassBadge.style.borderColor = 'var(--primary-neon)';
+            carClassBadge.style.color = 'var(--primary-neon)';
+          }
+        }
+        if (carSubId) carSubId.textContent = `GARAJ MODELİ #${item.id}`;
+        if (carName) carName.textContent = item.name;
+        if (carDesc) carDesc.textContent = item.desc;
+        if (carCost) carCost.textContent = item.cost;
+        if (carRent) carRent.textContent = item.rent;
+        if (carKm) carKm.textContent = item.km;
+        if (carMaint) carMaint.textContent = item.maint;
+        if (fleetCounter) fleetCounter.textContent = `${index + 1} / ${FLEET_DATA.length}`;
+
+        fleetTabs.forEach(t => {
+          const tabIdx = parseInt(t.getAttribute('data-index'));
+          if (tabIdx === index) {
+            t.classList.add('active');
+          } else {
+            t.classList.remove('active');
           }
         });
 
-        fleetTrack.scrollTo({ left: 0, behavior: 'smooth' });
-      });
-    });
-
-    if (fleetPrevBtn) {
-      fleetPrevBtn.addEventListener('click', () => {
-        fleetTrack.scrollBy({ left: -330, behavior: 'smooth' });
-      });
-    }
-    if (fleetNextBtn) {
-      fleetNextBtn.addEventListener('click', () => {
-        fleetTrack.scrollBy({ left: 330, behavior: 'smooth' });
-      });
+        carImg.style.opacity = '1';
+        carImg.style.transform = 'scale(1)';
+      }, 140);
     }
   }
 
-  // 8. VIP Cards Carousel & Tier Filter
-  const vipTabs = document.querySelectorAll('#vipTabs .tab-filter-btn');
-  const vipTrack = document.getElementById('vipTrack');
+  if (fleetTabs.length > 0) {
+    fleetTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const idx = parseInt(tab.getAttribute('data-index'));
+        renderFleet(idx);
+      });
+    });
+  }
+
+  if (fleetPrevBtn) {
+    fleetPrevBtn.addEventListener('click', () => {
+      renderFleet(currentCarIndex - 1);
+    });
+  }
+  if (fleetNextBtn) {
+    fleetNextBtn.addEventListener('click', () => {
+      renderFleet(currentCarIndex + 1);
+    });
+  }
+
+  // 8. SINGLE FEATURED VIP CARDS SPOTLIGHT (5 TIERS)
+  const VIP_DATA = [
+    {
+      levelClass: 'card-level-1',
+      levelText: 'SEVİYE 1',
+      badge: 'EXECUTIVE ELITE',
+      name: 'SILVER LEDGER',
+      sub: 'Başlangıç Kartı',
+      botLeft: 'Bonus: 1x',
+      botRight: 'Gereken: $100',
+      tierTag: 'PRESTİJ KARTI • KADEME 1',
+      title: 'Silver Ledger',
+      desc: 'Her yeni girişimcinin finansal serüvenine başladığı temel hesap kartı. Dokundukça sermaye biriktirir, nakit akışının temel taşını oluşturur.',
+      bonus: '1x Çarpan',
+      req: '$100',
+      credit: 'Bakiye x 2.0',
+      perk: 'Temel Dokunma Gücü'
+    },
+    {
+      levelClass: 'card-level-2',
+      levelText: 'SEVİYE 2',
+      badge: 'DIAMOND PRIVILEGE',
+      name: 'SAPPHIRE ACCESS',
+      sub: 'Safir Kristal',
+      botLeft: 'Bonus: 2x',
+      botRight: 'Gereken: $500',
+      tierTag: 'PRESTİJ KARTI • KADEME 2',
+      title: 'Sapphire Access',
+      desc: 'Safir kaplama özel alaşımlı kart. Borsa ve Forex işlemlerinde komisyon avantajı ve 2 kat nakit akışı sağlar.',
+      bonus: '2x Çarpan',
+      req: '$500',
+      credit: 'Bakiye x 3.0',
+      perk: 'Hızlı Forex Girişi'
+    },
+    {
+      levelClass: 'card-level-3',
+      levelText: 'SEVİYE 3',
+      badge: 'LEAF SOVEREIGN',
+      name: 'EMERALD TIER',
+      sub: 'Zümrüt Yeşili',
+      botLeft: 'Bonus: 4x',
+      botRight: 'Gereken: $2,500',
+      tierTag: 'PRESTİJ KARTI • KADEME 3',
+      title: 'Emerald Tier',
+      desc: 'Zümrüt yeşili kurumsal statü simgesi. Taksi filosu açılışlarında amortisman koruması ve 4 kat gelir çarpanı kazandırır.',
+      bonus: '4x Çarpan',
+      req: '$2,500',
+      credit: 'Bakiye x 4.0',
+      perk: 'Taksi Filo Koruması'
+    },
+    {
+      levelClass: 'card-level-4',
+      levelText: 'SEVİYE 4',
+      badge: 'LION STEWARD',
+      name: 'AMBER SPECIALIST',
+      sub: '24K Altın Aslan',
+      botLeft: 'Bonus: 8x',
+      botRight: 'Gereken: $10,000',
+      tierTag: 'PRESTİJ KARTI • KADEME 4',
+      title: 'Amber Specialist',
+      desc: '24 ayar altın işlemeli aslan armalı prestij kartı. Devasa gayrimenkul satın alımları ve bakiye x 5 kredi limitinin kapılarını açar.',
+      bonus: '8x Çarpan',
+      req: '$10,000',
+      credit: 'Bakiye x 5.0',
+      perk: 'Gayrimenkul Portföyü'
+    },
+    {
+      levelClass: 'card-level-5',
+      levelText: 'SEVİYE 5 • ZİRVE',
+      badge: 'SOVEREIGN BLACK',
+      name: 'BLACK PROTOCOL',
+      sub: 'Dünyanın Patronu',
+      botLeft: 'Bonus: 16x + IPO',
+      botRight: 'Gereken: $50,000',
+      tierTag: 'PRESTİJ KARTI • ZİRVE KADEME',
+      title: 'Black Protocol',
+      desc: 'Yeryüzünün en zengin forbes elitlerine verilen efsanevi siyah kart. Şirketlerini borsada halka arz etme ve Forbes 1. sırasına oturma hakkı verir.',
+      bonus: '16x + IPO',
+      req: '$50,000',
+      credit: 'Sınırsız Holding Kredisi',
+      perk: 'Forbes #1 Tahtı'
+    }
+  ];
+
+  let currentVipIndex = 0;
+  const vipCardPreview = document.getElementById('vipCardPreview');
+  const vcLevel = document.getElementById('vcLevel');
+  const vcBadge = document.getElementById('vcBadge');
+  const vcName = document.getElementById('vcName');
+  const vcSub = document.getElementById('vcSub');
+  const vcBottomLeft = document.getElementById('vcBottomLeft');
+  const vcBottomRight = document.getElementById('vcBottomRight');
+  const vipTierTag = document.getElementById('vipTierTag');
+  const vipTitle = document.getElementById('vipTitle');
+  const vipDesc = document.getElementById('vipDesc');
+  const vipBonus = document.getElementById('vipBonus');
+  const vipReq = document.getElementById('vipReq');
+  const vipCredit = document.getElementById('vipCredit');
+  const vipPerk = document.getElementById('vipPerk');
+  const vipCounter = document.getElementById('vipCounter');
+  const vipTabs = document.querySelectorAll('#vipTabs .widget-tab');
   const vipPrevBtn = document.getElementById('vipPrevBtn');
   const vipNextBtn = document.getElementById('vipNextBtn');
 
-  if (vipTabs && vipTrack) {
-    vipTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        vipTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
+  function renderVip(index) {
+    if (index < 0) index = VIP_DATA.length - 1;
+    if (index >= VIP_DATA.length) index = 0;
+    currentVipIndex = index;
+    const item = VIP_DATA[index];
 
-        const filter = tab.getAttribute('data-filter');
-        const cards = vipTrack.querySelectorAll('.ingame-card-item');
+    if (vipCardPreview) {
+      vipCardPreview.style.opacity = '0';
+      vipCardPreview.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        vipCardPreview.className = `ingame-card-item ${item.levelClass}`;
+        if (vcLevel) vcLevel.textContent = item.levelText;
+        if (vcBadge) vcBadge.textContent = item.badge;
+        if (vcName) vcName.textContent = item.name;
+        if (vcSub) vcSub.textContent = item.sub;
+        if (vcBottomLeft) vcBottomLeft.textContent = item.botLeft;
+        if (vcBottomRight) vcBottomRight.textContent = item.botRight;
 
-        cards.forEach(card => {
-          if (filter === 'all' || card.getAttribute('data-tier') === filter) {
-            card.classList.remove('hidden');
+        if (vipTierTag) vipTierTag.textContent = item.tierTag;
+        if (vipTitle) vipTitle.textContent = item.title;
+        if (vipDesc) vipDesc.textContent = item.desc;
+        if (vipBonus) vipBonus.textContent = item.bonus;
+        if (vipReq) vipReq.textContent = item.req;
+        if (vipCredit) vipCredit.textContent = item.credit;
+        if (vipPerk) vipPerk.textContent = item.perk;
+        if (vipCounter) vipCounter.textContent = `${index + 1} / ${VIP_DATA.length}`;
+
+        vipTabs.forEach((t, i) => {
+          if (i === index) {
+            t.classList.add('active');
           } else {
-            card.classList.add('hidden');
+            t.classList.remove('active');
           }
         });
 
-        vipTrack.scrollTo({ left: 0, behavior: 'smooth' });
+        vipCardPreview.style.opacity = '1';
+        vipCardPreview.style.transform = 'scale(1)';
+      }, 140);
+    }
+  }
+
+  if (vipTabs.length > 0) {
+    vipTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const idx = parseInt(tab.getAttribute('data-index'));
+        renderVip(idx);
       });
     });
+  }
 
-    if (vipPrevBtn) {
-      vipPrevBtn.addEventListener('click', () => {
-        vipTrack.scrollBy({ left: -270, behavior: 'smooth' });
-      });
-    }
-    if (vipNextBtn) {
-      vipNextBtn.addEventListener('click', () => {
-        vipTrack.scrollBy({ left: 270, behavior: 'smooth' });
-      });
-    }
+  if (vipPrevBtn) {
+    vipPrevBtn.addEventListener('click', () => {
+      renderVip(currentVipIndex - 1);
+    });
+  }
+  if (vipNextBtn) {
+    vipNextBtn.addEventListener('click', () => {
+      renderVip(currentVipIndex + 1);
+    });
   }
 });
