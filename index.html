@@ -1,11 +1,1093 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-<title>Business Bank Simulator</title>
-<style>body { font-family: sans-serif; text-align: center; margin-top: 50px; background-color: #111317; color: white; }</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Bank | Şimşek Game - Sıfırdan Dünyanın En Zengin İnsanı Ol</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Şimşek Game tarafından geliştirilen Business Bank ile sıfırdan başla. Tıkla, taksi filosu kur, borsa ve gayrimenkul yatırımlarıyla Forbes #1 koltuğuna otur.">
+  <meta name="keywords" content="business bank, şimşek game, simsekgame, forbes oyunu, finans oyunu, tıkla kazan simülasyonu, borsa simülatörü, google play android">
+  <meta name="author" content="Şimşek Game">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0D0E12">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://businessbank.simsekgame.com/">
+  <meta property="og:title" content="Business Bank | Sıfırdan Dünyanın En Zengin İnsanı Ol">
+  <meta property="og:description" content="Tıkla, filo kur, borsa ve halka arzlarla Forbes listesindeki Elon Mask ve Jeff Bozos'u geride bırak!">
+  <meta property="og:image" content="https://businessbank.simsekgame.com/assets/img/screen_dashboard.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/app_icon.png">
+
+  <!-- Google Fonts: Manrope, Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.1.0">
 </head>
 <body>
-<h1>Business Bank</h1>
-<p>Resmi Web Sitesi</p>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo-wrapper">
+        <img src="assets/img/logo.png" alt="Şimşek Game Logo" class="logo-icon">
+        <div class="logo-text">
+          <div class="logo-brand">BUSINESS <span>BANK</span></div>
+          <div class="logo-sub">by ŞİMŞEK GAME</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#how-it-works" class="nav-link">Zirveye Giden Yol</a>
+        <a href="#forbes-race" class="nav-link">Forbes Sıralaması</a>
+        <a href="#fleet" class="nav-link">Araç Filosu</a>
+        <a href="#vip-cards" class="nav-link">5 Prestij Kartı</a>
+        <a href="#screens" class="nav-link">Oyun Ekranları</a>
+        <a href="#studio" class="nav-link">Şimşek Game</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://simsekgame.com" target="_blank" class="btn btn-secondary" style="padding: 10px 18px; font-size: 0.85rem;">
+          <span>simsekgame.com ↗</span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.erkam.businessbank&hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.88rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12 3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L14.75 13.06 4.9 22.91C5.05 22.97 5.21 23 5.38 23C5.72 23 6.04 22.87 6.28 22.63L16.81 15.12ZM16.81 8.88L6.28 1.37C6.04 1.13 5.72 1 5.38 1C5.21 1 5.05 1.03 4.9 1.09L14.75 10.94 16.81 8.88ZM20.16 11.23C20.47 11.45 20.67 11.82 20.67 12.25C20.67 12.68 20.47 13.05 20.16 13.27L17.88 14.59L15.81 12.52 17.88 10.45L20.16 11.23Z"/></svg>
+          <span>Google Play'den İndir</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Menüyü Aç">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer">
+    <a href="#how-it-works">Zirveye Giden Yol (6 Adım)</a>
+    <a href="#forbes-race">Forbes #1 Mücadelesi</a>
+    <a href="#fleet">Araç Showroom & Filo</a>
+    <a href="#vip-cards">5 Prestij Kartı</a>
+    <a href="#screens">Oyun Ekranları</a>
+    <a href="#studio">Şimşek Game Stüdyosu</a>
+    <a href="https://play.google.com/store/apps/details?id=com.erkam.businessbank&hl=en" target="_blank" rel="noopener noreferrer" style="color: var(--primary-neon); font-weight:700;">Google Play'den İndir ↗</a>
+    <a href="https://simsekgame.com" target="_blank">Şimşek Game Portalı ↗</a>
+    <a href="https://erkan.simsekgame.com" target="_blank" style="color: var(--gold-royalty);">Geliştirici: Erkan Kaya ↗</a>
+  </div>
+
+  <!-- ================= HERO & INTERACTIVE TAPPER ================= -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge-ui">
+          <span class="badge-pulse"></span>
+          <span>FİNANSAL STRATEJİ &amp; İŞ SİMÜLASYONU</span>
+        </div>
+
+        <h1 class="hero-title">
+          Finansal Simülasyon &amp; Holding Yönetimi: <br>
+          <span class="text-gradient">Dünyanın En Zengin Forbes Eliti Ol!</span>
+        </h1>
+
+        <p class="hero-description" style="font-size: 1.05rem; line-height: 1.7; color: #E2E8F0;">
+          <strong>Business Bank</strong>; ekrana dokunarak ilk sermayeni kazandığın, ardından <strong>kripto para</strong>, <strong>Forex</strong>, <strong>borsa hisseleri</strong> ve <strong>emtia piyasalarında</strong> pozisyon açtığın; <strong>banka kredisi</strong> ve <strong>mevduat faizlerini</strong> yönetip <strong>taksi filoları</strong> ve <strong>gayrimenkul imparatorlukları</strong> kurduğun kapsamlı bir <strong>finansal ve iş simülasyonu oyunudur</strong>. 
+          <br><br>
+          Oyundaki nihai amacın: Bütün bu finansal enstrümanları ustaca kullanarak servetini katlamak, <strong>dünyanın en zengin Forbes elitleri arasına girmek ve o 1 numaralı tahtı rakiplerine karşı korumaktır!</strong>
+        </p>
+
+        <!-- Finansal Enstrümanlar Şeridi -->
+        <div class="financial-tools-pills">
+          <span class="f-pill">🪙 Kripto Alım-Satımı</span>
+          <span class="f-pill">💱 Forex Pozisyonları</span>
+          <span class="f-pill">📈 Borsa &amp; 75 Şirket Hissesi</span>
+          <span class="f-pill">🛢️ Emtia (Altın, Petrol)</span>
+          <span class="f-pill">🏦 Banka Kredisi &amp; Faizli Mevduat</span>
+          <span class="f-pill">🚕 15 Araçlık Taksi Filosu</span>
+          <span class="f-pill">🏢 20 Özel Gayrimenkul Mülkü</span>
+        </div>
+
+        <!-- 3 Adımda Oyunun Mantığı & Amacı -->
+        <div class="quick-play-steps">
+          <div class="play-step-item">
+            <div class="step-num-badge">1</div>
+            <div class="step-content">
+              <strong>İlk Sermaye &amp; Dokunmatik Akış</strong>
+              <span>Ekrana dokunarak ilk nakit akışını başlat, kasan hızla dolsun.</span>
+            </div>
+          </div>
+          <div class="play-step-item">
+            <div class="step-num-badge">2</div>
+            <div class="step-content">
+              <strong>Piyasalar, Banka &amp; Filo Yatırımları</strong>
+              <span>Kripto, Forex, mevduat, taksi ve emlak yatırımlarıyla çok yönlü pasif gelir kur.</span>
+            </div>
+          </div>
+          <div class="play-step-item">
+            <div class="step-num-badge">3</div>
+            <div class="step-content">
+              <strong>Forbes #1 Zirvesi &amp; Tahtı Koruma</strong>
+              <span>200 küresel milyarderi tahtından indir, Forbes elitlerinin zirvesini koru!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-buttons">
+          <a href="https://play.google.com/store/apps/details?id=com.erkam.businessbank&hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 15px 30px; font-size: 1rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12 3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L14.75 13.06 4.9 22.91C5.05 22.97 5.21 23 5.38 23C5.72 23 6.04 22.87 6.28 22.63L16.81 15.12ZM16.81 8.88L6.28 1.37C6.04 1.13 5.72 1 5.38 1C5.21 1 5.05 1.03 4.9 1.09L14.75 10.94 16.81 8.88ZM20.16 11.23C20.47 11.45 20.67 11.82 20.67 12.25C20.67 12.68 20.47 13.05 20.16 13.27L17.88 14.59L15.81 12.52 17.88 10.45L20.16 11.23Z"/></svg>
+            <span>Google Play'den İndir</span>
+          </a>
+          <a href="#how-it-works" class="btn btn-secondary" style="padding: 15px 24px; font-size: 1rem;">
+            <span>Nasıl Oynanır?</span>
+          </a>
+        </div>
+
+        <div class="hero-strip">
+          <div class="strip-box">
+            <div class="strip-num">#1<span>. Sıra</span></div>
+            <div class="strip-label">Forbes Zirve Hedefi</div>
+          </div>
+          <div class="strip-box">
+            <div class="strip-num">15<span> Model</span></div>
+            <div class="strip-label">Filo Araç Kataloğu</div>
+          </div>
+          <div class="strip-box">
+            <div class="strip-num">5<span> Kademe</span></div>
+            <div class="strip-label">Executive Prestij Kartı</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Interactive Game Tapper (Right Inside Phone Frame!) -->
+      <div class="live-phone-wrapper">
+        <div class="phone-ambient-glow"></div>
+
+        <div class="game-phone">
+          <div class="phone-speaker"></div>
+
+          <div class="phone-screen-game">
+            <!-- Game Top Status Bar -->
+            <div class="game-top-bar">
+              <div class="live-user-badge">
+                <span style="font-size: 0.9rem;">👤</span>
+                <span>Girişimci (Sen)</span>
+              </div>
+              <div class="live-pulse-badge">
+                <span>⚡ Pulse: 10s</span>
+              </div>
+            </div>
+
+            <!-- In-Game Balance -->
+            <div class="game-balance-area">
+              <div class="game-balance-label">KASA BAKİYESİ</div>
+              <div class="game-balance-number" id="live-balance">$0</div>
+              <div class="game-balance-sub" id="live-tap-power">+$10 / tık</div>
+            </div>
+
+            <!-- The In-Game Tappable Card -->
+            <div class="game-card-area">
+              <div class="tap-floating-container" id="tap-float-container"></div>
+
+              <div class="tappable-credit-card" id="live-tap-card">
+                <div class="card-glare"></div>
+                <div class="card-top-row">
+                  <div class="card-chip"></div>
+                  <div class="card-tier-label">EXECUTIVE ELITE</div>
+                </div>
+
+                <div class="card-middle-row">
+                  <div class="card-name-title">SILVER LEDGER</div>
+                  <div class="card-hint-text">⚡ DOKUN VE KAZAN!</div>
+                </div>
+
+                <div class="card-bottom-row">
+                  <div>SEVİYE 1 KART</div>
+                  <div>SOVEREIGN CORP</div>
+                </div>
+              </div>
+
+              <div id="live-status-msg" style="font-size: 0.68rem; color: #38bdf8; text-align: center; margin-top: 8px; font-weight: 700;">
+                ⚡ Kartına tıkla ve ilk sermayeni biriktir!
+              </div>
+            </div>
+
+            <!-- Upgrade Tap Action inside Phone -->
+            <div class="game-bottom-action">
+              <button class="tap-upgrade-btn" id="live-upgrade-btn">
+                <span>⚡ Tıklama Gücünü Yükselt</span>
+                <span class="cost" id="live-upgrade-cost">$100</span>
+              </button>
+            </div>
+
+            <!-- Exact In-Game Bottom Tabs -->
+            <div class="game-bottom-tabs">
+              <div class="tab-cell active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                <span>Kazanclar</span>
+              </div>
+              <div class="tab-cell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <span>Yatırım</span>
+              </div>
+              <div class="tab-cell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3"></path></svg>
+                <span>İşletme</span>
+              </div>
+              <div class="tab-cell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                <span>Banka</span>
+              </div>
+              <div class="tab-cell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path></svg>
+                <span>Profil</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6-STEP EMPIRE ROADMAP ================= -->
+  <section class="roadmap-section" id="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Zirveye Tırmanış Rehberi</div>
+        <h2 class="section-title">Sıfırdan Dünyanın En Zengin İnsanı Olma Serüveni</h2>
+        <p class="section-desc">
+          Business Bank, boş bir cüzdanla başlayıp Forbes sıralamasında 1 numaraya oturacağın 6 aşamalı acımasız bir finans yolculuğudur.
+        </p>
+      </div>
+
+      <div class="roadmap-timeline">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div>
+            <div class="step-card-header">
+              <span class="step-number-pill">ADIM 01</span>
+              <div class="step-icon-wrap">👆</div>
+            </div>
+            <h3>Kartına Dokun & İlk Sermayeni Kazan</h3>
+            <p>
+              Cebinde tek kuruş yokken başlarsın. Ekrana her dokunuşunda hesabına nakit akar. Tıklama gücünü Seviye 1'den Seviye 20'ye kadar ($750/tık tavanına) yükselterek ilk şirket sermayeni topla.
+            </p>
+          </div>
+          <div class="step-highlight">
+            <span>⚡ Tok Haptic Titreşim & $750 Hard Cap</span>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div>
+            <div class="step-card-header">
+              <span class="step-number-pill">ADIM 02</span>
+              <div class="step-icon-wrap">📊</div>
+            </div>
+            <h3>Yatırım Yolunu Seç: Kripto, Forex, Taksi veya Mevduat</h3>
+            <p>
+              İlk sermayen biriktiğinde tek bir seçeneğe mahkum değilsin: İster Forex veya Kripto'da al-sat yap, ister altın ve petrol emtialarına gir, ister bankaya mevduat yatırıp faiz topla, istersen ilk taksi filonu kur. Finans stratejini tamamen sen belirlersin!
+            </p>
+          </div>
+          <div class="step-highlight">
+            <span>📈 Kripto, Forex, Emtia, Mevduat & Taksi Seçenekleri</span>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div>
+            <div class="step-card-header">
+              <span class="step-number-pill">ADIM 03</span>
+              <div class="step-icon-wrap">🏢</div>
+            </div>
+            <h3>Gayrimenkul İmparatorluğu & Filo Büyütme</h3>
+            <p>
+              Nakit akışın hızlandıkça stüdyo dairelerden rezidanslara, AVM'lerden gökdelenlere uzanan mülk portföyü kur. Eş zamanlı olarak araç filonu Fiat Egea'dan Passat, Mercedes E-Class ve Rolls-Royce Ghost'a kadar genişlet.
+            </p>
+          </div>
+          <div class="step-highlight">
+            <span>🏛️ Daire, AVM, Plaza & 15 Farklı Araç Modeli</span>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div>
+            <div class="step-card-header">
+              <span class="step-number-pill">ADIM 04</span>
+              <div class="step-icon-wrap">💳</div>
+            </div>
+            <h3>Banka Kredisi, Kaldıraç & Piyasa Disiplini</h3>
+            <p>
+              Büyük fırsatlar için Sovereign Bank'tan bakiye x 5 kurumsal kredi çekerek finansal kaldıracını katla. Ancak unutma: 16 saatlik vergi borcunu ödemezsen gelirlerin dondurulur, finansal disiplin şart!
+            </p>
+          </div>
+          <div class="step-highlight">
+            <span>⚖️ Bakiye x 5 Kredi & 16 Saatlik Vergi Kilidi</span>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card">
+          <div>
+            <div class="step-card-header">
+              <span class="step-number-pill">ADIM 05</span>
+              <div class="step-icon-wrap">🏦</div>
+            </div>
+            <h3>Şirket Halka Arzı (IPO) & Holdingleşme</h3>
+            <p>
+              Yatırımlarını tek bir holding çatısında birleştir. Şirketlerini borsada halka arz (IPO) ederek yüz milyonlarca dolarlık kurumsal nakit enjeksiyonuna ulaş ve devasa fonları yönet.
+            </p>
+          </div>
+          <div class="step-highlight">
+            <span>🌐 Halka Arz Fonlaması & Global Holding Statüsü</span>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step-card" style="border-color: var(--gold-bright); box-shadow: var(--shadow-gold);">
+          <div>
+            <div class="step-card-header">
+              <span class="step-number-pill gold">ADIM 06 • ZİRVE</span>
+              <div class="step-icon-wrap" style="color: var(--gold-bright);">👑</div>
+            </div>
+            <h3>Forbes #1 Zirvesi & Tahtı Savunma</h3>
+            <p>
+              Elon Mask, Jeff Bozos ve Barnand Arnot gibi devleri Forbes listesinde tek tek geride bırak. Dünyanın en zengin insanı (#1) koltuğuna otur ve zirvedeki tahtını küresel krizlere karşı savun!
+            </p>
+          </div>
+          <div class="step-highlight" style="color: var(--gold-bright);">
+            <span>👑 Forbes #1 Eliti & Dünyanın Zirvesini Koruma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FORBES RACE SHOWCASE ================= -->
+  <section class="forbes-section" id="forbes-race">
+    <div class="container forbes-grid">
+      <div>
+        <div class="badge-ui" style="margin-bottom: 14px;">
+          <span>👑 Küresel Liderlik Tablosu</span>
+        </div>
+        <h2 style="font-size: 2.6rem; line-height: 1.15; margin-bottom: 18px;">
+          Forbes Milyarderlerini <br>
+          <span class="text-gold-gradient">Tek Tek Geride Bırak.</span>
+        </h2>
+        <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 22px;">
+          Oyundaki Forbes ekranı durağan değildir; rakiplerin de şirketlerini büyütür. Sermayeni akıllıca yöneterek sıralamada tırman; Top 10'a girdiğinde konfeti patlar, 1. sıraya ulaştığında ise dünyanın en zengin insanı unvanını kazanırsın!
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 26px;">
+          <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: #fff;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-neon)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Dinamik büyüme oranlarına sahip 200 küresel rakip</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: #fff;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-neon)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Top 10 Özel Karşılama Töreni & Rank 1 Konfeti Şöleni</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: #fff;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-neon)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Gerçekçi Parodi Milyarderler (Elon Mask, Jeff Bozos, Bull Gates)</span>
+          </div>
+        </div>
+
+        <a href="#download" class="btn btn-gold">
+          <span>Sıralamadaki Yerini Al</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- Forbes In-Game Styled Table -->
+      <div class="forbes-terminal-box">
+        <div class="forbes-header-row">
+          <div class="forbes-title-badge">
+            <span>🏆 FORBES DÜNYA LİGİ</span>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-subtle);">CANLI VERİ</div>
+        </div>
+
+        <div class="forbes-table">
+          <div class="forbes-row">
+            <div class="forbes-rank gold">#1</div>
+            <div class="forbes-info">
+              <div class="forbes-name">Elon Mask</div>
+              <div class="forbes-origin">X-Space / Teslo</div>
+            </div>
+            <div class="forbes-worth">$240.5 B</div>
+          </div>
+
+          <div class="forbes-row">
+            <div class="forbes-rank gold">#2</div>
+            <div class="forbes-info">
+              <div class="forbes-name">Jeff Bozos</div>
+              <div class="forbes-origin">Amazoon</div>
+            </div>
+            <div class="forbes-worth">$195.2 B</div>
+          </div>
+
+          <div class="forbes-row">
+            <div class="forbes-rank gold">#3</div>
+            <div class="forbes-info">
+              <div class="forbes-name">Barnand Arnot</div>
+              <div class="forbes-origin">LVMX Luxury</div>
+            </div>
+            <div class="forbes-worth">$182.0 B</div>
+          </div>
+
+          <div class="forbes-row">
+            <div class="forbes-rank">#4</div>
+            <div class="forbes-info">
+              <div class="forbes-name">Mike Zucker</div>
+              <div class="forbes-origin">Meto Platforms</div>
+            </div>
+            <div class="forbes-worth">$168.4 B</div>
+          </div>
+
+          <div class="forbes-row">
+            <div class="forbes-rank">#5</div>
+            <div class="forbes-info">
+              <div class="forbes-name">Bull Gates</div>
+              <div class="forbes-origin">Macrosoft</div>
+            </div>
+            <div class="forbes-worth">$142.1 B</div>
+          </div>
+
+          <!-- Player Row -->
+          <div class="forbes-row player">
+            <div class="forbes-rank" style="color: var(--primary-neon);">#⚡</div>
+            <div class="forbes-info">
+              <div class="forbes-name" style="color: var(--primary-neon);">Sen (Girişimci)</div>
+              <div class="forbes-origin" style="color: #fff;">Sovereign Corp • Zirveye Tırmanıyorsun!</div>
+            </div>
+            <div class="forbes-worth" style="color: var(--primary-neon);">Hemen Başla</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FLEET / SHOWROOM ================= -->
+  <section class="fleet-section" id="fleet">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Otonom Filo & Garaj</div>
+        <h2 class="section-title">Gerçek Oyun İçi Araç Showroom'u</h2>
+        <p class="section-desc">
+          Kazandığın sermayeyle sarı taksiden lüks makam araçlarına kadar 15 farklı modelle şehrin ulaşım ağını ele geçir.
+        </p>
+      </div>
+
+      <!-- Fleet Category Tabs & Carousel Nav -->
+      <div class="carousel-top-bar">
+        <div class="carousel-tabs" id="fleetTabs">
+          <button class="tab-filter-btn active" data-filter="all">Tüm Modeller (15)</button>
+          <button class="tab-filter-btn" data-filter="ekonomi">Ekonomi (4)</button>
+          <button class="tab-filter-btn" data-filter="isletme">İşletme (4)</button>
+          <button class="tab-filter-btn" data-filter="vip">VIP Sınıfı (4)</button>
+          <button class="tab-filter-btn" data-filter="sovereign">Sovereign &amp; Zirve (3)</button>
+        </div>
+        <div class="carousel-nav-arrows">
+          <button class="carousel-arrow-btn" id="fleetPrevBtn" aria-label="Önceki Araç">❮</button>
+          <button class="carousel-arrow-btn" id="fleetNextBtn" aria-label="Sonraki Araç">❯</button>
+        </div>
+      </div>
+
+      <div class="fleet-carousel-track" id="fleetTrack">
+        <!-- 1. Fiat Egea -->
+        <div class="car-card" data-category="ekonomi">
+          <span class="car-class-badge">Ekonomi Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/egea.png" alt="2024 Fiat Egea Sedan" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">2024 Fiat Egea Sedan</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$15,000</span></div>
+              <div>Getiri: <span class="car-rent">+$110 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Megane E-Tech -->
+        <div class="car-card" data-category="ekonomi">
+          <span class="car-class-badge">Ekonomi Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/meganeetech.png" alt="Renault Megane E-Tech" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Renault Megane E-Tech</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$22,000</span></div>
+              <div>Getiri: <span class="car-rent">+$180 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Skoda Superb -->
+        <div class="car-card" data-category="ekonomi">
+          <span class="car-class-badge">Ekonomi Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/superb.png" alt="Skoda Superb" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Skoda Superb</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$35,000</span></div>
+              <div>Getiri: <span class="car-rent">+$290 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Toyota Camry -->
+        <div class="car-card" data-category="ekonomi">
+          <span class="car-class-badge">Ekonomi Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/camry.png" alt="Toyota Camry (Hybrid)" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Toyota Camry (Hybrid)</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$42,000</span></div>
+              <div>Getiri: <span class="car-rent">+$360 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Passat Elegance -->
+        <div class="car-card" data-category="isletme">
+          <span class="car-class-badge">İşletme Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/passatelegance.png" alt="Volkswagen Passat Elegance" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">VW Passat Elegance</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$65,000</span></div>
+              <div>Getiri: <span class="car-rent">+$550 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Audi A6 -->
+        <div class="car-card" data-category="isletme">
+          <span class="car-class-badge">İşletme Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/audia6.png" alt="Audi A6" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Audi A6</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$85,000</span></div>
+              <div>Getiri: <span class="car-rent">+$780 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. BMW 5 Series -->
+        <div class="car-card" data-category="isletme">
+          <span class="car-class-badge">İşletme Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/bmw5serie.png" alt="BMW 5 Series" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">BMW 5 Series</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$105,000</span></div>
+              <div>Getiri: <span class="car-rent">+$980 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Mercedes E-Class -->
+        <div class="car-card" data-category="isletme">
+          <span class="car-class-badge">İşletme Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/eclass.png" alt="Mercedes E-Class" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Mercedes E-Class</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$120,000</span></div>
+              <div>Getiri: <span class="car-rent">+$1,150 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Porsche Panamera -->
+        <div class="car-card" data-category="vip">
+          <span class="car-class-badge">VIP Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/panamera.png" alt="Porsche Panamera" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Porsche Panamera</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$210,000</span></div>
+              <div>Getiri: <span class="car-rent">+$2,200 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. BMW 7 Series -->
+        <div class="car-card" data-category="vip">
+          <span class="car-class-badge">VIP Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/bmw7serie.png" alt="BMW 7 Series" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">BMW 7 Series</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$250,000</span></div>
+              <div>Getiri: <span class="car-rent">+$2,800 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Mercedes S-Class -->
+        <div class="car-card" data-category="vip">
+          <span class="car-class-badge">VIP Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/sclass.png" alt="Mercedes S-Class" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Mercedes S-Class</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$280,000</span></div>
+              <div>Getiri: <span class="car-rent">+$3,200 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Range Rover Autobiography -->
+        <div class="car-card" data-category="vip">
+          <span class="car-class-badge">VIP Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/ranegroverautobiography.png" alt="Range Rover Autobiography" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Range Rover Autobiography</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$320,000</span></div>
+              <div>Getiri: <span class="car-rent">+$3,800 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. Bentley Flying Spur -->
+        <div class="car-card" data-category="sovereign">
+          <span class="car-class-badge" style="border-color: var(--gold-bright); color: var(--gold-bright);">Sovereign Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/bentleyflying.png" alt="Bentley Flying Spur" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Bentley Flying Spur</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$650,000</span></div>
+              <div>Getiri: <span class="car-rent">+$8,500 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. Rolls Royce Ghost -->
+        <div class="car-card" data-category="sovereign">
+          <span class="car-class-badge" style="border-color: var(--gold-bright); color: var(--gold-bright);">Sovereign Sınıfı</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/rolsroyceghost.png" alt="Rolls Royce Ghost" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Rolls Royce Ghost</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$900,000</span></div>
+              <div>Getiri: <span class="car-rent">+$12,500 / saat</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15. Sovereign S1 (Custom) -->
+        <div class="car-card" data-category="sovereign" style="border-color: var(--primary-neon);">
+          <span class="car-class-badge" style="border-color: var(--primary-neon); color: var(--primary-neon);">Zirve Özel</span>
+          <div class="car-img-wrap">
+            <img src="assets/img/cars/executive_s1.png" alt="Sovereign S1 Custom" loading="lazy">
+          </div>
+          <div>
+            <div class="car-name">Sovereign S1 (Custom)</div>
+            <div class="car-stats-row">
+              <div>Fiyat: <span class="car-cost">$1,500,000</span></div>
+              <div>Getiri: <span class="car-rent">+$22,000 / saat</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5 VIP PRESTIGE CARDS ================= -->
+  <section class="vip-tier-section" id="vip-cards">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Statü Hiyerarşisi</div>
+        <h2 class="section-title">Oyunun 5 Resmi Prestij Kartı</h2>
+        <p class="section-desc">
+          Bakiyen büyüdükçe kilitleri açılan, her biri kredi çarpanını ve gelir bonusunu katlayan özel kart tasarımları.
+        </p>
+      </div>
+
+      <!-- VIP Cards Category Tabs & Carousel Nav -->
+      <div class="carousel-top-bar">
+        <div class="carousel-tabs" id="vipTabs">
+          <button class="tab-filter-btn gold active" data-filter="all">Tüm Kartlar (5)</button>
+          <button class="tab-filter-btn gold" data-filter="level-1">Seviye 1 (Silver)</button>
+          <button class="tab-filter-btn gold" data-filter="level-2">Seviye 2 (Sapphire)</button>
+          <button class="tab-filter-btn gold" data-filter="level-3">Seviye 3 (Emerald)</button>
+          <button class="tab-filter-btn gold" data-filter="level-4">Seviye 4 (Amber)</button>
+          <button class="tab-filter-btn gold" data-filter="level-5">Seviye 5 (Black)</button>
+        </div>
+        <div class="carousel-nav-arrows">
+          <button class="carousel-arrow-btn gold" id="vipPrevBtn" aria-label="Önceki Kart">❮</button>
+          <button class="carousel-arrow-btn gold" id="vipNextBtn" aria-label="Sonraki Kart">❯</button>
+        </div>
+      </div>
+
+      <div class="vip-carousel-track" id="vipTrack">
+        <!-- Level 1 -->
+        <div class="ingame-card-item card-level-1" data-tier="level-1">
+          <div class="ic-top">
+            <span class="ic-level">SEVİYE 1</span>
+            <span class="ic-tier-badge">EXECUTIVE ELITE</span>
+          </div>
+          <div>
+            <div class="ic-name">SILVER LEDGER</div>
+            <div style="font-size: 0.72rem; color: #B9CBBB;">Başlangıç Kartı</div>
+          </div>
+          <div class="ic-bottom">
+            <div>Bonus: 1x</div>
+            <div>Gereken: $100</div>
+          </div>
+        </div>
+
+        <!-- Level 2 -->
+        <div class="ingame-card-item card-level-2" data-tier="level-2">
+          <div class="ic-top">
+            <span class="ic-level">SEVİYE 2</span>
+            <span class="ic-tier-badge">DIAMOND PRIVILEGE</span>
+          </div>
+          <div>
+            <div class="ic-name">SAPPHIRE ACCESS</div>
+            <div style="font-size: 0.72rem; color: #38bdf8;">Safir Kristal</div>
+          </div>
+          <div class="ic-bottom">
+            <div>Bonus: 2x</div>
+            <div>Gereken: $500</div>
+          </div>
+        </div>
+
+        <!-- Level 3 -->
+        <div class="ingame-card-item card-level-3" data-tier="level-3">
+          <div class="ic-top">
+            <span class="ic-level">SEVİYE 3</span>
+            <span class="ic-tier-badge">LEAF SOVEREIGN</span>
+          </div>
+          <div>
+            <div class="ic-name">EMERALD TIER</div>
+            <div style="font-size: 0.72rem; color: #00E383;">Zümrüt Yeşili</div>
+          </div>
+          <div class="ic-bottom">
+            <div>Bonus: 4x</div>
+            <div>Gereken: $2,500</div>
+          </div>
+        </div>
+
+        <!-- Level 4 -->
+        <div class="ingame-card-item card-level-4" data-tier="level-4">
+          <div class="ic-top">
+            <span class="ic-level">SEVİYE 4</span>
+            <span class="ic-tier-badge">LION STEWARD</span>
+          </div>
+          <div>
+            <div class="ic-name">AMBER SPECIALIST</div>
+            <div style="font-size: 0.72rem; color: #FFC640;">24K Altın Aslan</div>
+          </div>
+          <div class="ic-bottom">
+            <div>Bonus: 8x</div>
+            <div>Gereken: $10,000</div>
+          </div>
+        </div>
+
+        <!-- Level 5 -->
+        <div class="ingame-card-item card-level-5" data-tier="level-5">
+          <div class="ic-top">
+            <span class="ic-level" style="color: var(--primary-neon);">SEVİYE 5 • ZİRVE</span>
+            <span class="ic-tier-badge" style="color: var(--primary-neon);">SOVEREIGN BLACK</span>
+          </div>
+          <div>
+            <div class="ic-name" style="color: var(--primary-neon);">BLACK PROTOCOL</div>
+            <div style="font-size: 0.72rem; color: #fff;">Dünyanın Patronu</div>
+          </div>
+          <div class="ic-bottom" style="color: var(--primary-neon);">
+            <div>Bonus: 16x + IPO</div>
+            <div>Gereken: $50,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IN-GAME TERMINAL SCREENS ================= -->
+  <section class="screens-section" id="screens">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Arayüz Vitrini</div>
+        <h2 class="section-title">Gerçek Oyun Ekranlarını İnceleyin</h2>
+        <p class="section-desc">
+          Aşağıdaki sekmelerden oyunun farklı modüllerini seçerek gerçek ekran görüntülerini canlı olarak keşfedin.
+        </p>
+      </div>
+
+      <div class="screen-tabs-bar">
+        <button class="screen-tab-btn active" data-screen="kazanclar">📊 Kazanclar (Dashboard)</button>
+        <button class="screen-tab-btn" data-screen="yatirim">📈 Yatırım Terminali</button>
+        <button class="screen-tab-btn" data-screen="isletme">🏢 Otonom Şirketler</button>
+        <button class="screen-tab-btn" data-screen="banka">🏦 Sovereign Bank & IPO</button>
+        <button class="screen-tab-btn" data-screen="profil">👤 Profil & Bilanço</button>
+      </div>
+
+      <div class="screen-view-box">
+        <div class="screen-phone-frame">
+          <img id="screen-view-img" src="assets/img/screen_dashboard.png" alt="Oyun Ekranı">
+        </div>
+
+        <div class="screen-details">
+          <h3 id="screen-view-title">Kazanclar (Dashboard): Tıkla ve Servet Biriktir</h3>
+          <p id="screen-view-desc">
+            Oyunun ana kontrol merkezi. Ortadaki özel kartına dokunarak tok haptic titreşimle bakiye biriktir. 20 Seviyeli geliştirme sistemiyle tıklama başına $750 hard cap tavanına ulaş.
+          </p>
+
+          <div class="screen-points-list" id="screen-view-points">
+            <div class="screen-point-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Tok dokunsal his ve gerçekçi kart arayüzü</span>
+            </div>
+            <div class="screen-point-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>10 saniyelik Sovereign Pulse kalp atışı</span>
+            </div>
+            <div class="screen-point-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Gelişmiş rozet ve bildirim kontrol merkezi</span>
+            </div>
+          </div>
+
+          <a href="https://play.google.com/store/apps/details?id=com.erkam.businessbank&hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12 3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L14.75 13.06 4.9 22.91C5.05 22.97 5.21 23 5.38 23C5.72 23 6.04 22.87 6.28 22.63L16.81 15.12ZM16.81 8.88L6.28 1.37C6.04 1.13 5.72 1 5.38 1C5.21 1 5.05 1.03 4.9 1.09L14.75 10.94 16.81 8.88ZM20.16 11.23C20.47 11.45 20.67 11.82 20.67 12.25C20.67 12.68 20.47 13.05 20.16 13.27L17.88 14.59L15.81 12.52 17.88 10.45L20.16 11.23Z"/></svg>
+            <span>Google Play'den Hemen Yükle</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ŞİMŞEK GAME STUDIO ================= -->
+  <section class="studio-section" id="studio" style="padding: 85px 0; border-top: 1px solid var(--outline-game); border-bottom: 1px solid var(--outline-game);">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Geliştirici Stüdyo</div>
+        <h2 class="section-title">Şimşek Game Vizyonu</h2>
+        <p class="section-desc">
+          Şimşek Game (<a href="https://simsekgame.com" target="_blank" style="color: var(--primary-neon); font-weight:700;">simsekgame.com</a>), mobil simülasyon oyunlarına ciddi finansal derinlik ve sarsılmaz mimari kazandırmak amacıyla kurulmuş bağımsız bir stüdyodur.
+        </p>
+      </div>
+
+      <div class="roadmap-timeline">
+        <div class="step-card">
+          <div class="step-icon-wrap" style="color: var(--primary-neon);">⚡</div>
+          <h3 style="margin-top: 14px;">Tamamen Çevrimdışı (Offline)</h3>
+          <p>
+            React Native MMKV yerel motoru sayesinde internet bağlantın olmasa bile borsa oynayabilir, filolarını büyütebilir ve çevrimdışı pasif gelir biriktirebilirsin.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-icon-wrap" style="color: var(--gold-bright);">🧠</div>
+          <h3 style="margin-top: 14px;">Sovereign CNS Nabzı</h3>
+          <p>
+            Her 10 saniyede bir çalışan merkezi kalp atışı ile faizler, vergi borçları, temettüler ve araç aşınma oranları gerçekçi bir ekonomide senkronize edilir.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-icon-wrap" style="color: #38bdf8;">🛡️</div>
+          <h3 style="margin-top: 14px;">Donanım Korumalı Anti-Cheat</h3>
+          <p>
+            Cihaz saatini ileri alma veya otomatik tıklama botları oyunda çalışmaz. Adil, prestijli ve gerçek bir küresel yarış deneyimi sunar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DOWNLOAD HUB ================= -->
+  <section class="download-section" id="download">
+    <div class="container">
+      <div class="download-banner">
+        <div class="badge-ui" style="margin-bottom: 18px;">
+          <span class="badge-pulse"></span>
+          <span>Google Play Store Yayında!</span>
+        </div>
+
+        <h2 style="font-size: 2.8rem; margin-bottom: 14px;">
+          Business Bank Şimdi <span class="text-gradient">Google Play'de!</span>
+        </h2>
+
+        <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto;">
+          Business Bank resmi olarak Google Play Store'da yayınlandı! Güvenle tek tıkla indirip sermayeni katlamaya ve Forbes #1 yarışına hemen başlayabilirsin.
+        </p>
+
+        <div class="download-cta-row" style="justify-content: center;">
+          <a href="https://play.google.com/store/apps/details?id=com.erkam.businessbank&hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 18px 42px; font-size: 1.15rem; box-shadow: 0 0 35px rgba(0,255,148,0.4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12 3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L14.75 13.06 4.9 22.91C5.05 22.97 5.21 23 5.38 23C5.72 23 6.04 22.87 6.28 22.63L16.81 15.12ZM16.81 8.88L6.28 1.37C6.04 1.13 5.72 1 5.38 1C5.21 1 5.05 1.03 4.9 1.09L14.75 10.94 16.81 8.88ZM20.16 11.23C20.47 11.45 20.67 11.82 20.67 12.25C20.67 12.68 20.47 13.05 20.16 13.27L17.88 14.59L15.81 12.52 17.88 10.45L20.16 11.23Z"/></svg>
+            <span>Google Play Store'dan İndir ↗</span>
+          </a>
+        </div>
+
+        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-subtle);">
+          Paket Kimliği: com.erkam.businessbank • Android 8.0 ve üzeri • Şimşek Game Resmi Dağıtımı
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Merak Edilenler</div>
+        <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-card open">
+          <button class="faq-btn">
+            <span>Oyun internetsiz (çevrimdışı) oynanabilir mi?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-body">
+            Evet, kesinlikle! Business Bank tamamen yerel MMKV veritabanı üzerinde çalışır. İnternetiniz olmasa bile tıklayabilir, taksilerinizi yönetebilir ve borsa karlarınızı katlayabilirsiniz.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <button class="faq-btn">
+            <span>Forbes listesinde 1. sıraya nasıl çıkabilirim?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-body">
+            İlk başta tıklayarak ilk sermayeni kazanmalı, ardından taksi filoları kurarak pasif gelirini artırmalısın. Kazandığın sermayeyle gayrimenkul alıp şirketlerini borsada halka arz (IPO) ederek Elon Mask ve Jeff Bozos gibi devleri geride bırakabilirsin.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <button class="faq-btn">
+            <span>16 Saatlik vergi kilidi nedir?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-body">
+            Hisse senedi satışından elde ettiğiniz karın %10'u vergi borcu olarak yazılır. Eğer bu borç 16 saat boyunca ödenmezse Sovereign CNS tüm şirket gelirlerinizi dondurur. Borcunuzu ödediğiniz an para akışı yeniden başlar.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <button class="faq-btn">
+            <span>Oyunu nasıl indirebilirim ve sistem gereksinimleri nelerdir?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-body">
+            Google Play Store üzerinden "Google Play Store'dan İndir" butonuna tıklayarak doğrudan ve güvenle telefonunuza yükleyebilirsiniz. Oyun, Android 8.0 ve üzeri işletim sistemine sahip tüm cihazlarla tam uyumludur.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-wrapper">
+            <img src="assets/img/logo.png" alt="Şimşek Game Logo" class="logo-icon">
+            <div class="logo-text">
+              <div class="logo-brand">BUSINESS <span>BANK</span></div>
+              <div class="logo-sub">by ŞİMŞEK GAME</div>
+            </div>
+          </div>
+          <p style="margin: 14px 0; font-size: 0.9rem; line-height: 1.6;">
+            Şimşek Game tarafından geliştirilen Sovereign Finans & Otonom Holding Simülasyonu.
+          </p>
+          <div style="font-size: 0.85rem; color: var(--text-subtle);">
+            Stüdyo: <a href="https://simsekgame.com" target="_blank" style="color: var(--primary-neon);">simsekgame.com</a> <br>
+            Oyun Portalı: <strong style="color: #fff;">businessbank.simsekgame.com</strong>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Oyun Rehberi</h4>
+          <ul>
+            <li><a href="#how-it-works">Zirveye Giden Yol</a></li>
+            <li><a href="#forbes-race">Forbes Sıralaması</a></li>
+            <li><a href="#fleet">Araç Showroom</a></li>
+            <li><a href="#vip-cards">5 Prestij Kartı</a></li>
+            <li><a href="#screens">Oyun Ekranları</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>İndirme & İletişim</h4>
+          <ul>
+            <li><a href="https://play.google.com/store/apps/details?id=com.erkam.businessbank&hl=en" target="_blank" rel="noopener noreferrer" style="color: var(--primary-neon); font-weight:600;">Google Play Store</a></li>
+            <li><a href="https://erkan.simsekgame.com" target="_blank">Geliştirici (Erkan Kaya)</a></li>
+            <li><a href="app-ads.txt" target="_blank">app-ads.txt</a></li>
+            <li><a href="mailto:erkamkaya@outlook.com.tr">erkamkaya@outlook.com.tr</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Yasal & Sözleşmeler</h4>
+          <ul>
+            <li><a href="privacy.html">Gizlilik Politikası (Privacy)</a></li>
+            <li><a href="terms.html">Kullanım Koşulları (Terms)</a></li>
+            <li><a href="#">Anti-Cheat Kuralları</a></li>
+            <li><a href="#">KVKK Bilgilendirmesi</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 <strong>Şimşek Game</strong>. Tüm Hakları Saklıdır.
+        </div>
+        <div>
+          Designed & Engineered with pride by <a href="https://simsekgame.com" target="_blank" style="color: var(--primary-neon);">Şimşek Game</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
