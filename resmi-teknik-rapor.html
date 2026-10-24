@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T.C. ŞİMŞEK OYUN TEKNOLOJİLERİ A.Ş. — RESMİ TEKNİK RAPOR DOSYASI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --paper-bg: #FAF7F0;
+    --paper-card: #FFFFFF;
+    --paper-border: #D1C7B7;
+    --paper-dark-border: #8C7D6B;
+    --ink-black: #1A1A18;
+    --ink-dark: #2B2A27;
+    --ink-mid: #4A4843;
+    --ink-light: #737069;
+    --official-navy: #0B1D3A;
+    --official-blue: #16325C;
+    --official-red: #A81C1C;
+    --official-crimson: #801212;
+    --official-gold: #C29B38;
+    --gold-dark: #8C6D1F;
+    --stamp-green: #1C6B38;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #12151B;
+    color: var(--ink-black);
+    font-family: 'Courier Prime', 'IBM Plex Mono', Courier, monospace;
+    line-height: 1.6;
+    font-size: 13px;
+    padding: 20px 10px;
+    background-image: 
+      radial-gradient(#222733 1px, transparent 1px),
+      linear-gradient(to bottom, #0F1218, #181E29);
+    background-size: 24px 24px, 100% 100%;
+  }
+
+  /* ══════════ ÜST KONTROL ÇUBUĞU ══════════ */
+  .control-bar {
+    max-width: 1040px;
+    margin: 0 auto 16px auto;
+    background: #1C222E;
+    border: 1px solid #364154;
+    border-radius: 6px;
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #E2E8F0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+
+  .control-bar .title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: #F1D286;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .control-bar .actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn {
+    background: var(--official-navy);
+    color: #FFF;
+    border: 1px solid var(--official-gold);
+    padding: 6px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn:hover {
+    background: var(--official-gold);
+    color: var(--official-navy);
+  }
+
+  .btn-print {
+    background: var(--official-red);
+    border-color: #E53E3E;
+  }
+
+  .btn-print:hover {
+    background: #C53030;
+    color: #FFF;
+  }
+
+  /* ══════════ EVRAK ANA KONTEYNER ══════════ */
+  .dossier {
+    max-width: 1040px;
+    margin: 0 auto;
+    background: var(--paper-bg);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7), 0 0 0 1px var(--paper-border);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Zımba & Dosya Kenarı Efekti */
+  .dossier::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 22px;
+    background: linear-gradient(to right, rgba(0,0,0,0.12), transparent);
+    border-right: 1px dashed rgba(140, 125, 107, 0.4);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  /* ══════════ ANTET & RESMİ BAŞLIK ══════════ */
+  .official-header {
+    padding: 40px 60px 20px 75px;
+    border-bottom: 2px solid var(--ink-black);
+    position: relative;
+  }
+
+  .state-emblem-wrap {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .state-emblem {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border: 2px solid var(--official-navy);
+    border-radius: 50%;
+    padding: 4px;
+    position: relative;
+  }
+
+  .state-emblem-inner {
+    width: 100%;
+    height: 100%;
+    border: 1px dashed var(--official-gold);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(11, 29, 58, 0.04);
+  }
+
+  .state-emblem-inner .star {
+    color: var(--official-red);
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .state-emblem-inner .text {
+    font-family: 'Playfair Display', serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--official-navy);
+  }
+
+  .org-titles {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .org-title-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--official-navy);
+    line-height: 1.3;
+  }
+
+  .org-title-sub {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-top: 4px;
+  }
+
+  .org-title-dept {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-top: 2px;
+  }
+
+  /* Evrak Numaraları & Bilgi Bloğu */
+  .dispatch-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    line-height: 1.7;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--paper-border);
+  }
+
+  .dispatch-left {
+    flex: 1;
+  }
+
+  .dispatch-right {
+    text-align: right;
+  }
+
+  .meta-label {
+    font-weight: 700;
+    color: var(--official-navy);
+  }
+
+  /* Gizlilik Kaşeleri */
+  .security-stamp {
+    position: absolute;
+    top: 35px;
+    right: 50px;
+    border: 3px double var(--official-red);
+    color: var(--official-red);
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transform: rotate(4deg);
+    background: rgba(168, 28, 28, 0.04);
+    box-shadow: 0 0 0 1px rgba(168, 28, 28, 0.2);
+    user-select: none;
+  }
+
+  .archive-stamp {
+    position: absolute;
+    top: 40px;
+    left: 45px;
+    border: 2px solid var(--stamp-green);
+    color: var(--stamp-green);
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    transform: rotate(-6deg);
+    background: rgba(28, 107, 56, 0.04);
+    user-select: none;
+  }
+
+  /* ══════════ İÇERİK GÖVDESİ ══════════ */
+  .dossier-body {
+    padding: 30px 60px 50px 75px;
+  }
+
+  /* Evrak Üst Yazı Tezkiresi */
+  .dispatch-brief {
+    background: #FFF;
+    border: 1px solid var(--paper-border);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.04);
+    position: relative;
+  }
+
+  .dispatch-brief::before {
+    content: 'TEZKERE NO: 2026/041';
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--paper-bg);
+    padding: 0 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--ink-light);
+  }
+
+  .brief-heading {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--official-navy);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--paper-border);
+  }
+
+  .brief-content {
+    font-size: 12px;
+    text-align: justify;
+    line-height: 1.8;
+    color: var(--ink-dark);
+  }
+
+  .brief-content p {
+    margin-bottom: 10px;
+    text-indent: 25px;
+  }
+
+  /* ══════════ RAPOR BAŞLIKLARI ══════════ */
+  .section-divider {
+    border-top: 3px double var(--ink-black);
+    margin: 45px 0 25px 0;
+    position: relative;
+  }
+
+  .section-header-box {
+    background: var(--official-navy);
+    color: #FFF;
+    padding: 12px 20px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 6px solid var(--official-gold);
+  }
+
+  .section-header-box .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #F8E7B9;
+  }
+
+  .section-header-box .sec-code {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    background: rgba(255,255,255,0.15);
+    padding: 2px 8px;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .sub-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--official-blue);
+    margin: 25px 0 12px 0;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed var(--paper-dark-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sub-title::before {
+    content: '§';
+    color: var(--official-gold);
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  p.text {
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: var(--ink-dark);
+    margin-bottom: 12px;
+    text-align: justify;
+  }
+
+  /* ══════════ TABLOLAR ══════════ */
+  .table-wrap {
+    margin: 18px 0;
+    overflow-x: auto;
+    border: 1px solid var(--paper-dark-border);
+    background: #FFF;
+  }
+
+  table.official-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
+  table.official-table thead th {
+    background: #EFE9DC;
+    color: var(--official-navy);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid var(--paper-dark-border);
+    border-right: 1px solid var(--paper-border);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 10.5px;
+  }
+
+  table.official-table thead th:last-child {
+    border-right: none;
+  }
+
+  table.official-table tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--paper-border);
+    border-right: 1px solid var(--paper-border);
+    color: var(--ink-dark);
+    vertical-align: top;
+  }
+
+  table.official-table tbody td:last-child {
+    border-right: none;
+  }
+
+  table.official-table tbody tr:nth-child(even) {
+    background: #FDFBF7;
+  }
+
+  table.official-table tbody tr:hover {
+    background: #F5EEDB;
+  }
+
+  .table-caption {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-light);
+    margin-bottom: 6px;
+  }
+
+  /* ══════════ TEKNİK KOD & ŞEMA BLOKLARI ══════════ */
+  .schema-block {
+    background: #141A24;
+    color: #DDE5F0;
+    padding: 16px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    border-left: 4px solid var(--official-gold);
+    border-radius: 0 4px 4px 0;
+    margin: 16px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .schema-block .comment { color: #62728A; }
+  .schema-block .keyword { color: #E5C07B; font-weight: 600; }
+  .schema-block .string { color: #98C379; }
+  .schema-block .type { color: #61AFEF; }
+  .schema-block .fn { color: #E06C75; }
+
+  .schema-tag {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 9px;
+    background: rgba(255,255,255,0.1);
+    color: #E5C07B;
+    padding: 2px 6px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ══════════ RESMİ İKAZ & TALİMAT KUTULARI ══════════ */
+  .official-notice {
+    border: 1px solid var(--paper-dark-border);
+    background: #FFFDF8;
+    padding: 14px 18px;
+    margin: 18px 0;
+    position: relative;
+    border-left: 5px solid var(--official-navy);
+  }
+
+  .official-notice.critical {
+    border-left-color: var(--official-red);
+    background: #FFF9F9;
+  }
+
+  .official-notice.approved {
+    border-left-color: var(--stamp-green);
+    background: #F8FFF9;
+  }
+
+  .notice-head {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--official-navy);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .official-notice.critical .notice-head { color: var(--official-red); }
+  .official-notice.approved .notice-head { color: var(--stamp-green); }
+
+  .notice-body {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink-dark);
+  }
+
+  /* ══════════ İMZA & PARAF SİRKÜLERİ ══════════ */
+  .sign-area {
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 2px solid var(--ink-black);
+  }
+
+  .sign-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .sign-cell {
+    border: 1px dashed var(--paper-dark-border);
+    padding: 20px 10px 10px 10px;
+    background: #FFF;
+    position: relative;
+  }
+
+  .sign-cell .role {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--official-navy);
+    margin-bottom: 40px;
+  }
+
+  .sign-cell .signature-sample {
+    font-family: 'Playfair Display', cursive, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: #1A365D;
+    line-height: 1;
+    transform: rotate(-3deg);
+    margin-bottom: 8px;
+  }
+
+  .sign-cell .name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-black);
+  }
+
+  .sign-cell .title {
+    font-size: 9.5px;
+    color: var(--ink-light);
+  }
+
+  .official-circular-stamp {
+    width: 90px;
+    height: 90px;
+    border: 2px solid var(--official-crimson);
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-10deg);
+    color: var(--official-crimson);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.2;
+    background: rgba(168, 28, 28, 0.03);
+    box-shadow: inset 0 0 0 1px rgba(168, 28, 28, 0.4);
+  }
+
+  /* Sayfa Altlığı */
+  .dossier-footer {
+    padding: 20px 75px 30px 75px;
+    border-top: 1px solid var(--paper-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--ink-light);
+    letter-spacing: 1px;
+  }
+
+  /* ══════════ YAZDIRMA (PRINT) PROFİLİ ══════════ */
+  @media print {
+    body {
+      background: #FFF;
+      padding: 0;
+      color: #000;
+    }
+    .control-bar { display: none !important; }
+    .dossier {
+      box-shadow: none;
+      border: none;
+      max-width: 100%;
+    }
+    .dossier::before { display: none; }
+    .official-header { padding: 20px 40px; }
+    .dossier-body { padding: 20px 40px; }
+    .section-divider { page-break-before: always; margin-top: 0; }
+    .schema-block {
+      background: #F0F4F8;
+      color: #000;
+      border: 1px solid #CCC;
+    }
+    .sign-cell { background: transparent; }
+  }
+
+  @media (max-width: 768px) {
+    .official-header, .dossier-body, .dossier-footer {
+      padding-left: 30px;
+      padding-right: 20px;
+    }
+    .sign-grid { grid-template-columns: 1fr; }
+    .security-stamp, .archive-stamp { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- KONTROL & İŞLEM ÇUBUĞU -->
+<div class="control-bar">
+  <div class="title">
+    <span>📜</span> ŞİMŞEK GAME — RESMİ ŞARTNAME VE TEKNİK DÖNÜŞÜM DOSYASI
+  </div>
+  <div class="actions">
+    <button class="btn btn-print" onclick="window.print()">
+      <span>🖨️</span> PDF / Yazdır
+    </button>
+  </div>
+</div>
+
+<div class="dossier">
+
+  <!-- RESMİ ANTET BÖLÜMÜ -->
+  <header class="official-header">
+    <div class="security-stamp">HİZMETE ÖZEL / TİCARİ SIR</div>
+    <div class="archive-stamp">ARŞİV NO: ŞG-2026/041</div>
+
+    <div class="state-emblem-wrap">
+      <div class="state-emblem">
+        <div class="state-emblem-inner">
+          <div class="star">★</div>
+          <div class="text">ŞG</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-titles">
+      <div class="org-title-main">ŞİMŞEK OYUN VE FİNANS TEKNOLOJİLERİ A.Ş.</div>
+      <div class="org-title-sub">YAZILIM MÜHENDİSLİĞİ VE BİLGİ TEKNOLOJİLERİ DİREKTÖRLÜĞÜ</div>
+      <div class="org-title-dept">Merkezi Çekirdek Sistemler & Dağıtık Oyun Mimarisi Çalışma Grubu</div>
+    </div>
+
+    <div class="dispatch-meta">
+      <div class="dispatch-left">
+        <div><span class="meta-label">SAYI:</span> ŞG-2026/AR-GE/MMO-0041-T</div>
+        <div><span class="meta-label">KONU:</span> Business Bank MMO Çevrimiçi Altyapı, Domain-Driven Design (DDD) Mimari Şartnamesi ve Entegrasyon Raporu</div>
+      </div>
+      <div class="dispatch-right">
+        <div><span class="meta-label">TARİH:</span> 19 Ekim 2026</div>
+        <div><span class="meta-label">EKLER:</span> 4 Teknik Şartname, 1 Uygulama Cetveli</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dossier-body">
+
+    <!-- TEZKERE & GİRİŞ ÜST YAZISI -->
+    <div class="dispatch-brief">
+      <div class="brief-heading">YÖNETİM KURULU VE TEKNİK ÇALIŞMA GRUBUNA TEZKERE</div>
+      <div class="brief-content">
+        <p>
+          Halen tekil cihaz hafızasında (MMKV/Zustand) yerel döngüyle çalışmakta olan <strong>Business Bank</strong> simülasyon oyunumuzun; eşzamanlı yüz binlerce kullanıcının gerçek zamanlı alım-satım yapabildiği, ortak bir makroekonomik para arzına (M2) bağlı olarak enflasyon ve deflasyon üreten, sabit lot kısıtlı hisse senedi piyasasını ve tekil gayrimenkul mülkiyetini barındıran merkezi bir <strong>MMO (Devasa Çok Oyunculu) Finansal Ekosistemine</strong> dönüştürülmesi amacıyla hazırlanan teknik inceleme ve uygulama şartnamesi aşağıda istihzar edilmiştir.
+        </p>
+        <p>
+          İşbu rapor; yazılım mimarisinden bulut donanım kaynaklarına, Apple/Google mağaza regülasyonlarından mevcut 50+ oyun içi kuralın sunucu otoritesine (Server-Authoritative) taşınmasına kadar tüm operasyonel safhaları bağlayıcı hükümlerle tespit etmektedir.
+        </p>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- BÖLÜM 1: YAZILIM MİMARİSİ VE TEKNOLOJİ SEÇİMİ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <div class="section-header-box">
+      <div class="sec-title">BÖLÜM I: YAZILIM MİMARİSİ, DDD BOUNDED CONTEXTLER VE YAPI</div>
+      <div class="sec-code">DOKÜMAN: ŞG-R1-MİM</div>
+    </div>
+
+    <p class="text">
+      Teknoloji seçimi; sıfır hata toleransı gerektiren bakiye mutabakatı (ACID), anlık mikro-saniye seviyesinde fiyat sinyali yayını ve çapraz platform (Android, iOS, Web) kod tekrarını minimize etme gayesiyle yapılmıştır.
+    </p>
+
+    <div class="table-caption">TABLO 1.1: ÇEKİRDEK TEKNOLOJİ BİLEŞENLERİ VE SEÇİM GEREKÇELERİ</div>
+    <div class="table-wrap">
+      <table class="official-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Katman</th>
+            <th style="width: 25%;">Seçilen Teknoloji</th>
+            <th>Gerekçe & Mimari Standart</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sunucu Çatısı</strong></td>
+            <td><strong>NestJS 11 (Node.js 22 LTS)</strong></td>
+            <td>TypeScript 5.x tam uyumu; Domain-Driven Design (DDD) için doğal modül, Dependency Injection ve CQRS ayrımı; kurumsal WebSocket Gateway entegrasyonu.</td>
+          </tr>
+          <tr>
+            <td><strong>Ana Veritabanı</strong></td>
+            <td><strong>PostgreSQL 17</strong></td>
+            <td>Finansal emir eşleştirmede zorunlu ACID garantisi; <code>SELECT ... FOR UPDATE</code> ile satır seviyesinde kilit (pessimistic lock) ve JSONB desteği.</td>
+          </tr>
+          <tr>
+            <td><strong>Önbellek & Sinyal</strong></td>
+            <td><strong>Redis 7 (Valkey)</strong></td>
+            <td>Gerçek zamanlı piyasa fiyatlarının önbelleklenmesi; Forbes sıralaması için O(log N) sorted set yapısı (ZADD/ZREVRANK); küme pub/sub.</td>
+          </tr>
+          <tr>
+            <td><strong>Haberleşme</strong></td>
+            <td><strong>Socket.IO 4.x</strong></td>
+            <td>Namespace/Room mimarisi; multi-node küme desteği (Redis Adapter); bağlantı kopmalarında otomatik yeniden bağlanma ve tamponlama.</td>
+          </tr>
+          <tr>
+            <td><strong>İş Kuyrukları</strong></td>
+            <td><strong>BullMQ 5</strong></td>
+            <td>10 saniyelik Sovereign Pulse döngüsü, saatlik temettü dağıtımı, vergi tahsilat hacizleri gibi ağır arka plan işlerinin asenkron yönetimi.</td>
+          </tr>
+          <tr>
+            <td><strong>Depo Yapısı</strong></td>
+            <td><strong>Turborepo Monorepo</strong></td>
+            <td><code>apps/mobile</code>, <code>apps/web</code>, <code>apps/server</code> ve ortak <code>packages/core</code> kütüphanesinin tek merkezden derlenmesi.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-title">1.1 Domain-Driven Design (DDD) Bounded Context Haritası</div>
+    <p class="text">
+      Sistem, aralarında katı sınırlar bulunan ve birbiriyle yalnızca Domain Event'leri ve DTO'lar üzerinden haberleşen 9 Bounded Context'e taksim edilmiştir:
+    </p>
+
+    <div class="table-wrap">
+      <table class="official-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Bounded Context</th>
+            <th style="width: 25%;">Sorumluluk Alanı</th>
+            <th>Aggregate Root & Çekirdek Kurallar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Economy Engine</strong></td>
+            <td>Merkezi Darphane & Nabız</td>
+            <td><code>EconomyState</code>: Her 10 saniyede bir Sovereign Pulse işletimi; Fisher formülüyle M2 para arzı takibi; enflasyon/deflasyon katsayısı üretimi.</td>
+          </tr>
+          <tr>
+            <td><strong>Stock Exchange</strong></td>
+            <td>Hisse Senedi Borsası</td>
+            <td><code>StockListing</code>: 75 şirket; <strong>SABİT ARZ (1.000.000 lot/şirket)</strong>; arz-talep baskısına bağlı fiyat esnekliği; limit emir tahtası.</td>
+          </tr>
+          <tr>
+            <td><strong>Real Estate</strong></td>
+            <td>Gayrimenkul Mülkiyeti</td>
+            <td><code>Property</code>: 20 mimari şablon; <strong>GLOBAL STOK KISITI (Azami 5 mülk/şablon)</strong>; her alımda %10 enflasyon; oyuncular arası açık artırma.</td>
+          </tr>
+          <tr>
+            <td><strong>Fleet & Business</strong></td>
+            <td>Taksi & Lojistik Filosu</td>
+            <td><code>Business</code> & <code>VehicleInstance</code>: 15 taksi, 5 tır modeli; kondisyon aşınması; maliyetin 1.20 katında zorunlu amortisman/emeklilik.</td>
+          </tr>
+          <tr>
+            <td><strong>Sovereign Bank</strong></td>
+            <td>Bankacılık & Halka Arz</td>
+            <td><code>LoanContract</code>, <code>DepositVault</code>, <code>IPOListing</code>: Net varlığın %25'i kadar kredi; %3.42 sabit faiz; %49 azami halka arz payı.</td>
+          </tr>
+          <tr>
+            <td><strong>MegaCorp Holding</strong></td>
+            <td>Holdingler & Şubeler</td>
+            <td><code>HoldingCompany</code>: %75 hisse ele geçirmesiyle tetiklenen hostile takeover; 4 sektör; şube açma; personel istihdamı ve grev riski.</td>
+          </tr>
+          <tr>
+            <td><strong>Forbes Leaderboard</strong></td>
+            <td>Küresel Sıralama</td>
+            <td><code>LeaderboardEntry</code>: Tüm oyuncuların anlık servet sıralaması (Redis ZSET); ilk günlerde 200 parodi NPC milyarder ile hibrit yarış.</td>
+          </tr>
+          <tr>
+            <td><strong>Wallet & Identity</strong></td>
+            <td>Cüzdan & Kimlik</td>
+            <td><code>PlayerWallet</code>: Bakiye, kart kademesi (1-5), tıklama gücü, 4 kategoride vergi borcu, 16 saatlik temerrüt haciz motoru.</td>
+          </tr>
+          <tr>
+            <td><strong>Notification Hub</strong></td>
+            <td>Sinyalizasyon & Push</td>
+            <td><code>Notification</code>: Toast uyarı katmanları, marjin çağrıları, açık artırma teklifleri ve cihaz bildirimleri (FCM/APNs).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-title">1.2 WebSocket Kanalları ve Veri Tasarrufu (Delta Encoding)</div>
+    <p class="text">
+      Her 10 saniyede bir binlerce kullanıcıya 75 hissenin tüm verisini göndermek ağ tıkanmasına sebep olacağından, <strong>Delta Sıkıştırma Protokolü</strong> mecburi kılınmıştır. Yalnızca fiyatı değişen enstrümanlar ikili dizi (tuple) formatında iletilir:
+    </p>
+
+    <div class="schema-block">
+      <div class="schema-tag">JSON Sinyal Protokolü</div>
+<span class="comment">// SUNUCU -&gt; İSTEMCİ (Namespace: /market | Room: stocks:all)</span>
+{
+  <span class="keyword">"t"</span>: <span class="string">1729331200</span>,             <span class="comment">// Unix Zaman Damgası</span>
+  <span class="keyword">"inf"</span>: <span class="string">0.0014</span>,               <span class="comment">// Anlık Saatlik Enflasyon Katsayısı (%0.14)</span>
+  <span class="keyword">"s"</span>: {                       <span class="comment">// Değişen Hisseler: [Son Fiyat, Yüzde Değişim, Kalan Lot]</span>
+    <span class="keyword">"ATYR"</span>: [<span class="type">145.85</span>, <span class="type">0.45</span>, <span class="type">435200</span>],
+    <span class="keyword">"GOOGL"</span>: [<span class="type">2841.10</span>, <span class="type">-0.15</span>, <span class="type">89100</span>],
+    <span class="keyword">"TESLO"</span>: [<span class="type">682.40</span>, <span class="type">1.20</span>, <span class="type">12400</span>]
+  }
+}
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- BÖLÜM 2: TEKNİK ALTYAPI VE MALİYET ANALİZİ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <div class="section-divider"></div>
+
+    <div class="section-header-box">
+      <div class="sec-title">BÖLÜM II: TEKNİK ALTYAPI, DONANIM BOYUTLANDIRMA VE BÜTÇE</div>
+      <div class="sec-code">DOKÜMAN: ŞG-R2-ALT</div>
+    </div>
+
+    <p class="text">
+      Sistemin ölçekleme stratejisi üç kademeli olarak modellenmiştir. Başlangıçta minimum operasyonel giderle yüksek stabilite sağlanması hedeflenmektedir.
+    </p>
+
+    <div class="table-caption">TABLO 2.1: DONANIM VE BULUT BARINDIRMA KADEMELERİ</div>
+    <div class="table-wrap">
+      <table class="official-table">
+        <thead>
+          <tr>
+            <th>Kademe</th>
+            <th>Eşzamanlı Kullanıcı (CCU)</th>
+            <th>Mimari Yapılandırma</th>
+            <th>Aylık Maliyet (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>FAZ 1: Başlangıç</strong></td>
+            <td>0 — 5.000 CCU</td>
+            <td>Tekil Dedicated Sunucu (Hetzner CPX31: 4 vCPU, 8 GB RAM, 160 GB NVMe); Dockerize PG 17 ve Redis; Cloudflare Free.</td>
+            <td><strong>$21 — $31 / Ay</strong></td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 2: Büyüme</strong></td>
+            <td>5.000 — 50.000 CCU</td>
+            <td>3x App Düğümü (Hetzner CCX33); Yük Dengeleyici (HAProxy/Nginx); Yönetilen PG (1 Primary + 1 Read Replica); Redis Sentinel; Ayrı BullMQ.</td>
+            <td><strong>~$330 / Ay</strong></td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 3: Tam Ölçek</strong></td>
+            <td>50.000 — 200.000+ CCU</td>
+            <td>Kubernetes Kümeleri (5-10 düğüm); PostgreSQL Citus (Yatay Sharding); Redis Cluster (6 düğüm); Cloudflare Business; Prometheus/Grafana Pro.</td>
+            <td><strong>~$1.200 / Ay</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-title">2.1 PostgreSQL Veri Hacmi ve İndeksleme Şartı</div>
+    <p class="text">
+      100.000 kayıtlı kullanıcı senaryosunda disk hacmi <strong>~2.5 GB</strong>, 1.000.000 kullanıcıda ise <strong>~25 GB</strong> civarındadır. Darboğazı önlemek üzere aşağıdaki DDL indekslerinin oluşturulması mecburi kılınmıştır:
+    </p>
+
+    <div class="schema-block">
+      <div class="schema-tag">PostgreSQL 17 DDL İndeksleri</div>
+<span class="comment">-- Forbes Sıralaması İndeksi (Anlık bakiye taraması için)</span>
+<span class="keyword">CREATE INDEX</span> idx_wallet_net_worth <span class="keyword">ON</span> wallets (cash_balance <span class="keyword">DESC</span>);
+
+<span class="comment">-- Portföy ve Lot Sorguları</span>
+<span class="keyword">CREATE INDEX</span> idx_holdings_user <span class="keyword">ON</span> stock_holdings (user_id);
+<span class="keyword">CREATE INDEX</span> idx_holdings_stock <span class="keyword">ON</span> stock_holdings (stock_id);
+
+<span class="comment">-- Boşta ve Müsait Gayrimenkuller</span>
+<span class="keyword">CREATE INDEX</span> idx_property_available <span class="keyword">ON</span> properties (id) <span class="keyword">WHERE</span> owner_id <span class="keyword">IS NULL</span>;
+
+<span class="comment">-- Aktif Limit Emirleri</span>
+<span class="keyword">CREATE INDEX</span> idx_orders_active <span class="keyword">ON</span> limit_orders (stock_id, type, target_price) 
+  <span class="keyword">WHERE</span> status = <span class="string">'ACTIVE'</span>;
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- BÖLÜM 3: PLATFORM GEREKSİNİMLERİ VE REGÜLASYONLAR -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <div class="section-divider"></div>
+
+    <div class="section-header-box">
+      <div class="sec-title">BÖLÜM III: PLATFORM STANDARTLARI (ANDROID / iOS / WEB)</div>
+      <div class="sec-code">DOKÜMAN: ŞG-R3-PLT</div>
+    </div>
+
+    <div class="official-notice critical">
+      <div class="notice-head">⚠️ DİKKAT: APPLE APP STORE REGÜLASYONU (GUIDELINE 4.8)</div>
+      <div class="notice-body">
+        iOS istemcisinde Google Sign-In veya sair üçüncü taraf giriş alternatifi sunulduğu takdirde, <strong>Sign in with Apple (Apple ile Giriş Yap)</strong> entegrasyonu mecburi bir şarttır. Aksi halde sürüm inceleme aşamasında kesin ret (rejection) alacaktır. Yıllık Apple Developer Program bedeli <strong>$99</strong>'dır.
+      </div>
+    </div>
+
+    <div class="table-caption">TABLO 3.1: PLATFORM TEKNİK KARŞILAŞTIRMA VE ÖDEME REJİMİ</div>
+    <div class="table-wrap">
+      <table class="official-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Standart</th>
+            <th style="width: 25%;">Android (Google Play)</th>
+            <th style="width: 25%;">iOS (App Store)</th>
+            <th>Web (PWA / Doğrudan)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hedef Sürüm</strong></td>
+            <td>Android 14+ (targetSdk 36, minSdk 24)</td>
+            <td>iOS 15.0+ (Xcode 16 / Swift 5.9)</td>
+            <td>Modern Chromium, Safari 15+, Firefox</td>
+          </tr>
+          <tr>
+            <td><strong>Oturum Açma</strong></td>
+            <td>Email/Şifre + Google Sign-In</td>
+            <td>Email/Şifre + <strong>Apple Sign-In (Şart)</strong></td>
+            <td>Email/Şifre + Google OAuth + Apple ID</td>
+          </tr>
+          <tr>
+            <td><strong>Uygulama İçi Satın Alma</strong></td>
+            <td>Google Play Billing v7 (SSV zorunlu)</td>
+            <td>StoreKit 2 (App Store API SSV)</td>
+            <td><strong>Stripe / iyzico Doğrudan Entegrasyon</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Mağaza Komisyonu</strong></td>
+            <td>%15 — %30</td>
+            <td>%15 — %30</td>
+            <td style="color:var(--stamp-green); font-weight:700;">YALNIZCA %2.9 + ₺0.30 (Büyük Avantaj)</td>
+          </tr>
+          <tr>
+            <td><strong>Bildirim İletimi</strong></td>
+            <td>Firebase Cloud Messaging (FCM)</td>
+            <td>APNs (FCM Köprüsüyle)</td>
+            <td>Web Push API (VAPID Sertifikası)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-title">3.1 Sunucu Tarafı Satın Alma Doğrulaması (SSV) Zorunluluğu</div>
+    <p class="text">
+      Mevcut tek oyunculu sürümde satın alımlar cihaz içinde yerel fonksiyonlarla (<code>grantVIP()</code>) işletilmektedir. Çok oyunculu düzende bu durum ağır bir güvenlik açığı oluşturacağından; mobil istemci faturayı (receipt token) sunucuya iletecek, sunucu Google/Apple uç noktalarıyla el sıkışıp doğrulamayı aldıktan sonra veritabanına bakiye yazacaktır.
+    </p>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- BÖLÜM 4: MEVCUT OYUN ANALİZİ VE 50 İŞ KURALI MİGRASYONU -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <div class="section-divider"></div>
+
+    <div class="section-header-box">
+      <div class="sec-title">BÖLÜM IV: 50 OYUN KURALININ SUNUCU OTORİTESİNE AKTARIMI</div>
+      <div class="sec-code">DOKÜMAN: ŞG-R4-UYM</div>
+    </div>
+
+    <p class="text">
+      Mevcut kod tabanında <code>useEngineStore.js</code> içerisinde bulunan ~600 satırlık Sovereign Pulse döngüsü istemciden tamamen silinerek sunucudaki <strong>EconomyEngine</strong> çekirdeğine nakledilecektir. İstemcideki DevPanel şifresi (<code>'Erkam2000206!'</code>) ve hileli bakiye fonksiyonları imha edilerek Rol Tabanlı Yetkilendirme (RBAC) kurulacaktır.
+    </p>
+
+    <div class="table-caption">TABLO 4.1: TAŞINACAK VE UYARLANACAK 50 TEMEL İŞ KURALI LİSTESİ</div>
+    <div class="table-wrap">
+      <table class="official-table">
+        <thead>
+          <tr>
+            <th style="width: 5%;">No</th>
+            <th style="width: 25%;">Kural / Eşik Adı</th>
+            <th style="width: 30%;">Mevcut Konum (Client)</th>
+            <th>Yeni Sunucu Mimarisi &amp; Uygulama Hükmü</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>Tıklama Gücü Formülü</td>
+            <td><code>useUserStore:252</code></td>
+            <td><code>clickPower × 2^(cardLevel-1) × (overclock ? 10 : 1)</code> sunucu tarafında hesaplanır.</td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>Tıklama Tavan Gücü</td>
+            <td><code>useUserStore:345</code></td>
+            <td>Temel tıklama gücü $750 sınırında dondurulur; istemci manipülasyonu engellenir.</td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td>Otomatik Tıklayıcı Koruması</td>
+            <td><code>useUserStore:214</code></td>
+            <td>1000ms içinde 20 tıklama aşımı banlanır; 3 ihtarda hesap bakiyesi müsadere edilir.</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td>Prestij Kart Eşikleri</td>
+            <td><code>useUserStore:256</code></td>
+            <td>[100, 500, 2.500, 10.000, 50.000] tıklama basamakları veritabanında denetlenir.</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td>Kart Seviye Nakit Primleri</td>
+            <td><code>useUserStore:256</code></td>
+            <td>[$5K, $50K, $250K, $1M, $10M] primleri doğrudan sunucu cüzdan bakiyesine yazılır.</td>
+          </tr>
+          <tr>
+            <td>06</td>
+            <td>16 Saatlik Vergi Giyotini</td>
+            <td><code>useUserStore:433</code></td>
+            <td>Vergi borcu 16 saat ödenmediğinde o gelir kategorisi derhal dondurulur (Haciz).</td>
+          </tr>
+          <tr>
+            <td>07</td>
+            <td>Gelir Vergisi Matrahları</td>
+            <td><code>useEngineStore:31</code></td>
+            <td>İşletme %20, Gayrimenkul %5-30, Borsa Temettü %15, Mevduat %10 stopaj.</td>
+          </tr>
+          <tr>
+            <td>08</td>
+            <td>Hisse Fiyat Dalgalanması</td>
+            <td><code>useMarketStore:280</code></td>
+            <td>Drift, ortalamaya dönüş (mean-reversion) ve rastgele oynaklık sunucuda hesaplanır.</td>
+          </tr>
+          <tr>
+            <td>09</td>
+            <td>Kripto Flash Pump/Crash</td>
+            <td><code>useMarketStore:380</code></td>
+            <td>%0.3 ihtimalli +%14 şok artış veya -%12 çöküş döngüsü sunucu oraklıyla tetiklenir.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Hisse Başına Fiyat Klampı</td>
+            <td><code>useMarketStore:328</code></td>
+            <td>Bir 10s'lik nabızda fiyat değişimi [-%8.0, +%8.0] bandında sınırlandırılır.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Kripto Başına Fiyat Klampı</td>
+            <td><code>useMarketStore:430</code></td>
+            <td>Bir 10s'lik nabızda kripto değişimi [-%3.5, +%4.0] bandında sınırlandırılır.</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Borsa Alım/Satım Komisyonu</td>
+            <td><code>useMarketStore:645</code></td>
+            <td>Standart kullanıcı %0.10, VIP statülü kullanıcı %0.002 oranında komisyon öder.</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Kripto Risk Maruziyet Tavanı</td>
+            <td><code>useMarketStore:636</code></td>
+            <td>Bir oyuncu tek bir kripto para üzerinde azami $15.000.000 pozisyon açabilir.</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Düşmanca Ele Geçirme (Takeover)</td>
+            <td><code>useMarketStore:684</code></td>
+            <td>Elit hisselerde %75 paya ulaşılması MegaCorp Yönetim Kurulu koltuğunu açar.</td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td>Hisse Değer Artış Vergisi</td>
+            <td><code>useMarketStore:737</code></td>
+            <td>Hisse satış kârı üzerinden %10 oranında anında vergi borcu tahakkuk ettirilir.</td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>Gayrimenkul Satın Alım Enflasyonu</td>
+            <td><code>useBusinessStore:157</code></td>
+            <td>Her genel mülk satışında o şablonun taban fiyatı <strong>tüm evrende +%10</strong> artar.</td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td>Gayrimenkul Global Stok Limiti</td>
+            <td><code>useBusinessStore:150</code></td>
+            <td>Şablon başına dünya genelinde yalnızca 5 birim arz edilebilir; fazlası satılamaz.</td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td>Gayrimenkul Değerlenme Hızı</td>
+            <td><code>useBusinessStore:633</code></td>
+            <td>Günlük %1 doğal sermaye artışı (pulse başına <code>1 + 0.01/8640</code>) sunucuda işlenir.</td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td>Gayrimenkul Kira Artış Oranı</td>
+            <td><code>useBusinessStore:640</code></td>
+            <td>Günlük %0.5 kira getirisi artışı sunucu nabzında gayrimenkul sahibine yansıtılır.</td>
+          </tr>
+          <tr>
+            <td>20</td>
+            <td>Mülk Acil Tasfiye Bedeli</td>
+            <td><code>RealEstateDetailModal</code></td>
+            <td>Gayrimenkulün anında elden çıkarılmasında %15 kesintiyle %85 net iade ödenir.</td>
+          </tr>
+          <tr>
+            <td>21</td>
+            <td>Filo Kondisyon Gelir Cezası</td>
+            <td><code>useBusinessStore:61</code></td>
+            <td>Kondisyon %50 altına inen ticari araçların saatlik getirisi anında yarıya düşürülür.</td>
+          </tr>
+          <tr>
+            <td>22</td>
+            <td>Ticari Araç Emeklilik Şartı</td>
+            <td><code>useBusinessStore:508</code></td>
+            <td>Kümülatif geliri alış maliyetinin 1.20 katına ulaşan araç hurdaya ayrılır.</td>
+          </tr>
+          <tr>
+            <td>23</td>
+            <td>Dinamik Araç Bakım Bedeli</td>
+            <td><code>useBusinessStore:383</code></td>
+            <td><code>maintenanceCost × (wearTier / 100)</code> formülüyle tamirat tahsil edilir.</td>
+          </tr>
+          <tr>
+            <td>24</td>
+            <td>İşletme Hangar Genişletmesi</td>
+            <td><code>useBusinessStore</code></td>
+            <td><code>(kapasite/10) × $1.000.000</code> harcanarak 60 dakikalık inşaat süreci başlatılır.</td>
+          </tr>
+          <tr>
+            <td>25</td>
+            <td>İşletme Tasfiye Bedeli</td>
+            <td><code>useBusinessStore</code></td>
+            <td>Şirket tasfiyesinde toplam yatırılan sermayenin %80'i nakden iade edilir.</td>
+          </tr>
+          <tr>
+            <td>26</td>
+            <td>Merkez Bankası Kredi Faizi</td>
+            <td><code>useBankStore</code></td>
+            <td>Sabit %3.42 kredi faizi tahakkuk ettirilir.</td>
+          </tr>
+          <tr>
+            <td>27</td>
+            <td>Azami Kredi Çekim Limiti</td>
+            <td><code>BankOverview</code></td>
+            <td>Kullanıcı ancak Net Varlığının azami %25'i kadar kredi kullanabilir.</td>
+          </tr>
+          <tr>
+            <td>28</td>
+            <td>Kredi Geri Ödeme Vadesi</td>
+            <td><code>useBankStore</code></td>
+            <td>Toplam borç 24 eşit saatlik taksite bölünerek her nabızda tahsil edilir.</td>
+          </tr>
+          <tr>
+            <td>29</td>
+            <td>Mevduat Saatlik Getirisi</td>
+            <td><code>useBankStore</code></td>
+            <td>Kasaya yatırılan likit fona saatlik %2.0 faiz işletilir (%10 stopaja tabidir).</td>
+          </tr>
+          <tr>
+            <td>30</td>
+            <td>Forex Kaldıraç Seviyeleri</td>
+            <td><code>ExchangeTerminal</code></td>
+            <td>1x, 10x, 25x, 50x ve azami 100x kaldıraçlı CFD pozisyonu sunucu marjiniyle açılır.</td>
+          </tr>
+          <tr>
+            <td>31</td>
+            <td>Forex Marjin Likidasyon Eşiği</td>
+            <td><code>useBankStore</code></td>
+            <td>Kayıp teminatın %90'ına ulaştığında pozisyon sunucu tarafından anında likide edilir.</td>
+          </tr>
+          <tr>
+            <td>32</td>
+            <td>Forex Spread ve Kayma Payı</td>
+            <td><code>ExchangeTerminal</code></td>
+            <td><code>notional × 0.00005 × (1 + leverage/1000)</code> komisyonu açılışta kesilir.</td>
+          </tr>
+          <tr>
+            <td>33</td>
+            <td>Kıymetli Maden Vault Kirası</td>
+            <td><code>useBankStore</code></td>
+            <td>Altın/Gümüş/Elmas kasası $5.000 kira bedeli ödenmeden ticarete açılamaz.</td>
+          </tr>
+          <tr>
+            <td>34</td>
+            <td>Halka Arz (IPO) Çoğunluk Payı</td>
+            <td><code>useBankStore</code></td>
+            <td>Kurucu azami %49 hisse satabilir; %51 yönetim kontrolü mecburi kılınır.</td>
+          </tr>
+          <tr>
+            <td>35</td>
+            <td>Halka Arz Lot Sayısı Hesabı</td>
+            <td><code>useBankStore</code></td>
+            <td><code>max(1.000.000, floor(değerleme / 25))</code> kadar hisse piyasaya sürülür.</td>
+          </tr>
+          <tr>
+            <td>36</td>
+            <td>Şirket Değerleme Formülü</td>
+            <td><code>useBankStore</code></td>
+            <td><code>max(50K, sermaye + toplamKazanılan×1.5 + saatlikGelir×80)</code> formülü geçerlidir.</td>
+          </tr>
+          <tr>
+            <td>37</td>
+            <td>Holding Misyon Aşamaları</td>
+            <td><code>useMegaCorpStore</code></td>
+            <td>5 kademeli operasyonel adım; her kademe <code>(adım+1) × $1.000.000</code> sermaye ister.</td>
+          </tr>
+          <tr>
+            <td>38</td>
+            <td>Holding Şube Limiti Genişletme</td>
+            <td><code>useMegaCorpStore</code></td>
+            <td>$50.000.000 bedel ve 60 dakika bekleme süresiyle +10 şube limiti açılır.</td>
+          </tr>
+          <tr>
+            <td>39</td>
+            <td>Holding Envanter Tüketimi</td>
+            <td><code>useEngineStore</code></td>
+            <td><code>maxInventory / 1080</code> nabız tüketimi; 3 saatte hammadde sıfırlanır.</td>
+          </tr>
+          <tr>
+            <td>40</td>
+            <td>Personel Maaş Yükümlülüğü</td>
+            <td><code>useEngineStore</code></td>
+            <td>Holding brüt hasılatının %35'i personel bordrosu olarak birikir.</td>
+          </tr>
+          <tr>
+            <td>41</td>
+            <td>Holding İşçi Grevi Hükmü</td>
+            <td><code>useEngineStore</code></td>
+            <td>Maaş borcu 16 saat ödenmediğinde fabrika ve şubeler greve girer, gelir sıfırlanır.</td>
+          </tr>
+          <tr>
+            <td>42</td>
+            <td>Makro Piyasa Döngüsü Periyodu</td>
+            <td><code>useMarketStore</code></td>
+            <td>Her 1-3 saatte bir %30 Boğa, %30 Ayı, %40 Nötr makro döngü sunucuda tetiklenir.</td>
+          </tr>
+          <tr>
+            <td>43</td>
+            <td>Döviz Kuru Hedef Kayması</td>
+            <td><code>useBankStore</code></td>
+            <td>Her 120 nabızda (20 dakika) kurlarda yeni orta vadeli hedef fiyat tayin edilir.</td>
+          </tr>
+          <tr>
+            <td>44</td>
+            <td>Güvenli Liman Temettü Payı</td>
+            <td><code>useBankStore</code></td>
+            <td>Her 360 nabızda (1 saat) Altın/Gümüşe %0.05, CHF/EUR/GBP'ye %0.03 faiz verilir.</td>
+          </tr>
+          <tr>
+            <td>45</td>
+            <td>Azami Çevrimdışı Gelir Limiti</td>
+            <td><code>useEngineStore:540</code></td>
+            <td>Kullanıcı oyunda değilken gelir birikimi <strong>azami 12 saatle</strong> sınırlandırılır.</td>
+          </tr>
+          <tr>
+            <td>46</td>
+            <td>Promosyon Kodu Kullanım Limiti</td>
+            <td><code>useUserStore</code></td>
+            <td>Kodlar tek kullanımlık olarak veritabanında denetlenir (Örn: erkam1m, erkam5m).</td>
+          </tr>
+          <tr>
+            <td>47</td>
+            <td>VIP Günlük Ödül Protokolü</td>
+            <td><code>useUserStore</code></td>
+            <td>UTC gün dönümünde bir defaya mahsus $50.000.000 hibe sunucu saatine göre verilir.</td>
+          </tr>
+          <tr>
+            <td>48</td>
+            <td>İşletme Hasılat Turbo Süresi</td>
+            <td><code>useUserStore</code></td>
+            <td>Ödüllü reklam sonrası 3600 saniye (1 saat) boyunca %20 ciro artışı uygulanır.</td>
+          </tr>
+          <tr>
+            <td>49</td>
+            <td>Overclock Tıklama Çarpanı</td>
+            <td><code>useUserStore</code></td>
+            <td>30 saniye süreyle tıklama gücü 10 katına çıkarılır; sunucu kronometresi işler.</td>
+          </tr>
+          <tr>
+            <td>50</td>
+            <td>Forbes Milyarder Dalgalanması</td>
+            <td><code>useForbesStore</code></td>
+            <td>İlk 10 NPC serveti %0.00008, diğerleri %0.00015 volatiliteyle canlı nefes alır.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- BÖLÜM 5: YOL HARİTASI VE İCRA HÜKÜMLERİ -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <div class="section-divider"></div>
+
+    <div class="section-header-box">
+      <div class="sec-title">BÖLÜM V: UYGULAMA TAKVİMİ, FAZLAR VE YÜRÜRLÜK</div>
+      <div class="sec-code">DOKÜMAN: ŞG-R5-İCR</div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="official-table">
+        <thead>
+          <tr>
+            <th style="width: 15%;">Faz No</th>
+            <th style="width: 25%;">Çalışma Başlığı</th>
+            <th style="width: 20%;">Termin Süresi</th>
+            <th>Hedef Teslim ve Çıktı Standardı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>FAZ 0</strong></td>
+            <td>Altyapı & Monorepo</td>
+            <td>1 — 2 Hafta</td>
+            <td>Turborepo, PostgreSQL, Redis, Prisma şemaları ve Docker ortamının ayağa kaldırılması.</td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 1</strong></td>
+            <td>Kimlik & Cüzdan Motoru</td>
+            <td>4 — 6 Hafta</td>
+            <td>JWT Auth, Google/Apple OAuth, Cüzdan CRUD, Tıklama motoru ve WebSocket ağ geçidi.</td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 2</strong></td>
+            <td>Borsa & Kripto Takas</td>
+            <td>4 — 6 Hafta</td>
+            <td>Sabit 1M lot arzı, alım/satım kilitleri (FOR UPDATE), limit emir tahtası, delta yayını.</td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 3</strong></td>
+            <td>Gayrimenkul & Filo</td>
+            <td>4 — 6 Hafta</td>
+            <td>Global 5 adetlik mülk sınırı, dinamik enflasyon, araç amortismanı ve açık artırmalar.</td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 4</strong></td>
+            <td>Banka, Forex & IPO</td>
+            <td>3 — 4 Hafta</td>
+            <td>Kredi taksit tahsilatı, kaldıraçlı CFD marjin likidasyonu ve %49 halka arz modülü.</td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 5</strong></td>
+            <td>MegaCorp & Sovereign Pulse</td>
+            <td>3 — 4 Hafta</td>
+            <td>Sunucu tarafı 10s nabız, holding grevleri, Redis Forbes sıralaması ve M2 enflasyon regülasyonu.</td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 6</strong></td>
+            <td>Çapraz Platform & İstemciler</td>
+            <td>4 — 6 Hafta</td>
+            <td>React Native (Mobil) uyarlaması, React 19 (Web) arayüzü, PWA ve kesinti senkronizasyonu.</td>
+          </tr>
+          <tr>
+            <td><strong>FAZ 7</strong></td>
+            <td>Denetim & Yayına Çıkış</td>
+            <td>2 — 4 Hafta</td>
+            <td>k6 yük testleri (10K CCU), güvenlik açığı taraması, mağaza onayları ve kademeli açılış.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- İMZA VE ONAY SİRKÜLERİ -->
+    <div class="sign-area">
+      <div style="text-align: center; font-size: 11px; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; color: var(--official-navy);">
+        İŞBU ŞARTNAME VE TEKNİK RAPOR DOSYASI YETKİLİ HEYETÇE TETKİK EDİLEREK İMZA ALTINA ALINMIŞTIR.
+      </div>
+
+      <div class="sign-grid">
+        <div class="sign-cell">
+          <div class="role">Sistem & Oyun Baş Mimarı</div>
+          <div class="signature-sample">Erkam Şimşek</div>
+          <div class="name">Erkam ŞİMŞEK</div>
+          <div class="title">Yazılım Mühendisliği Direktörü</div>
+        </div>
+
+        <div class="sign-cell">
+          <div class="role">Mühür & Tasdik Makamı</div>
+          <div class="official-circular-stamp">
+            <span>Şimşek Game</span>
+            <span style="font-size:12px; margin: 2px 0;">★</span>
+            <span>MÜHÜRLÜ ONAY</span>
+          </div>
+          <div class="name" style="margin-top:12px;">TEKNİK İCRA KURULU</div>
+          <div class="title">Karar No: 2026/084</div>
+        </div>
+
+        <div class="sign-cell">
+          <div class="role">Altyapı & Ağ Koordinatörü</div>
+          <div class="signature-sample">Sistem Komisyonu</div>
+          <div class="name">Bulut Mimari Grubu</div>
+          <div class="title">Dağıtık Sistemler Uzmanı</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dossier-body -->
+
+  <footer class="dossier-footer">
+    <div>EVRAK KODU: ŞG-2026-BB-0041-RESMİ</div>
+    <div>HİZMETE ÖZEL / TİCARİ GİZLİLİK DERECESİ</div>
+    <div>SAYFA 1 / 1 (NİHAİ NÜSHA)</div>
+  </footer>
+
+</div><!-- /dossier -->
+
+</body>
+</html>

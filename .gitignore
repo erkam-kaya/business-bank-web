@@ -1,0 +1,10 @@
+# Large binaries and archives
+downloads/
+v1_old/
+*.zip
+*.apk
+*.tar.gz
+
+# OS files
+.DS_Store
+Thumbs.db

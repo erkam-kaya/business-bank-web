@@ -119,3 +119,29 @@ flowchart LR
 1. **Asla Faz Atlamayın:** Ajan M1 tamamlanmadan M2'ye, M2 tamamlanmadan M3'e geçemez.
 2. **DoD Doğrulaması:** Her görev tamamlandığında "Definition of Done" maddesi test edilir ve çalışır durumda olduğu kullanıcıya raporlanır.
 3. **Context Koruma:** Her fazda tüm proje geçmişi yerine, yalnızca o anki Milestone ve ilgili `05-BACKEND-SCHEMA.md` verisi verilerek token tüketimi minimumda tutulur.
+
+---
+
+### 10. Sunucu Altyapı Envanteri & Ortam Profili (Server Specification Blueprint)
+Canlı dağıtım ve üretim ortamı için gereken resmi sunucu gereksinimleri ve profil envanteri tablosu:
+
+| Parametre | Minimum Gereksinim | Önerilen Üretim (Production) | Canlı Durum / Not |
+|---|---|---|---|
+| **İşletim Sistemi** | Ubuntu 22.04 LTS x86_64 | Ubuntu 24.04 LTS x86_64 | Linux tabanlı kararlı kernel |
+| **İşlemci (vCPU)** | 2 vCPU | 4 - 8 vCPU | BullMQ 10s tick engine ve WebSocket concurreny |
+| **Bellek (RAM)** | 4 GB RAM + 2 GB Swap | 8 - 16 GB RAM + 4 GB Swap | Postgres 17 buffer pool ve Redis in-memory cache |
+| **Depolama (Disk)** | 40 GB NVMe SSD | 100+ GB NVMe SSD | Günlük DB snapshotları ve WAL archiving |
+| **Docker & Compose** | Docker 25+ & Compose v2 | Docker Engine + Swarm/K8s hazır | Container tabanlı izole mikro-servisler |
+| **Ağ / Bant Genişliği**| 100 Mbps Port | 1 Gbps Port (Sınırsız Trafik) | 50.000 CCU WebSocket heartbeat & kur akışı |
+| **Subdomain Yönlendirmeleri** | - `businessbank.simsekgame.com`<br>- `api.simsekgame.com`<br>- `ws.simsekgame.com` | Nginx Reverse Proxy üzerinden SSL Termination | Cloudflare Full (Strict) SSL |
+| **Port & Güvenlik Duvarı (UFW)** | Port 22 (SSH), 80 (HTTP), 443 (HTTPS) açık; 5432 (Postgres) ve 6379 (Redis) dış dünyaya kapalı (localhost only). |
+
+---
+
+### 11. Antigravity IDE Entegrasyonu & Çalışma Metodolojisi
+Geliştirmenin **Antigravity IDE** üzerinde hatasız yürütülmesi için belirlenen kural seti:
+
+1. **Workspace Kuralı (`.agents/rules/mmo-protocol.md`):** Antigravity IDE agent'ının her oturumda bu 6 protokol belgesini zorunlu kural olarak yüklemesi.
+2. **Sidecar & Inline Test Kontrolü:** Yazılan her kod bloğunun Antigravity IDE terminalinde test edilmesi, derleme hatalarının inline diagnostic lenses ile anında çözülmesi.
+3. **Interaktif Faz Onayı:** Her alt görev (Task) tamamlandığında görsel diff (Visual Diff Overlay) incelenerek sonraki adıma geçilmesi.
+4. **Subagent Delegasyonu:** Büyük testler veya veri tabanı analizleri gerektiğinde Antigravity `invoke_subagent` mekanizması ile arka planda çalıştırılması.

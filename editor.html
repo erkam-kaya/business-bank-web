@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Bank — Oyun İçerik & Konfigürasyon Editörü (Admin Studio)</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0D0E12;
+      --bg-card: #161920;
+      --bg-surface: #1E222D;
+      --border: #2A303F;
+      --border-focus: #00FF94;
+      --neon: #00FF94;
+      --gold: #FFC837;
+      --red: #FF5A5A;
+      --text-white: #FFFFFF;
+      --text-muted: #9BA4B5;
+      --text-dim: #5A6478;
+      --font-main: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-head: 'Manrope', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-white);
+      font-family: var(--font-main);
+      padding-bottom: 60px;
+    }
+
+    /* Top Nav */
+    .topbar {
+      background: #11141A;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-title {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-title span { color: var(--neon); }
+    .badge-admin {
+      background: rgba(0, 255, 148, 0.15);
+      border: 1px solid var(--neon);
+      color: var(--neon);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .btn-neon { background: var(--neon); color: #000; border-color: var(--neon); }
+    .btn-neon:hover { background: #00DD80; }
+    .btn-gold { background: var(--gold); color: #000; border-color: var(--gold); }
+    .btn-gold:hover { background: #E6B22A; }
+    .btn-secondary { background: var(--bg-surface); color: #FFF; border-color: var(--border); }
+    .btn-secondary:hover { border-color: var(--text-muted); }
+    .btn-danger { background: rgba(255, 90, 90, 0.15); color: var(--red); border-color: var(--red); }
+    .btn-danger:hover { background: var(--red); color: #FFF; }
+
+    /* Layout */
+    .container {
+      max-width: 1300px;
+      margin: 25px auto 0;
+      padding: 0 24px;
+    }
+
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 25px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: #FFF; background: var(--bg-surface); }
+    .tab-btn.active {
+      color: var(--neon);
+      background: rgba(0, 255, 148, 0.08);
+      border-color: rgba(0, 255, 148, 0.3);
+    }
+
+    /* Section Views */
+    .tab-view { display: none; }
+    .tab-view.active { display: block; }
+
+    /* Content Cards Grid */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    .editor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .editor-card:hover { border-color: var(--border-focus); }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .card-id {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+    }
+    .card-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      font-family: var(--font-mono);
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: #FFF;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--neon);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Output Terminal */
+    .terminal-box {
+      background: #090B0E;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #C3CEDF;
+      max-height: 480px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--neon);
+      color: #000;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 10px 30px rgba(0, 255, 148, 0.4);
+      display: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="brand-title">
+      BUSINESS <span>BANK</span>
+      <span class="badge-admin">İçerik Stüdyosu (Config Editor)</span>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn btn-secondary" onclick="exportJSON()">
+        <span>💾 JSON Dışa Aktar</span>
+      </button>
+      <button class="btn btn-gold" onclick="exportJSCode()">
+        <span>📋 JS Kodu Olarak Kopyala</span>
+      </button>
+      <button class="btn btn-neon" onclick="saveToLocalStorage()">
+        <span>✓ Değişiklikleri Kaydet</span>
+      </button>
+      <a href="index.html" class="btn btn-secondary" style="text-decoration:none;">
+        <span>← Tanıtım Sitesine Dön</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Navigation Tabs -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('vehicles')">
+        <span>🚕 Araç Filosu (15 Model)</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('realestate')">
+        <span>🏢 Gayrimenkuller (20 Mülk)</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('stocks')">
+        <span>📈 Borsa Hisseleri (Elit &amp; TR)</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('promos')">
+        <span>🎟️ Promosyon Kodları</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('export')">
+        <span>📦 Kod &amp; Dışa Aktarma Merkezi</span>
+      </button>
+    </div>
+
+    <!-- ================= TAB 1: VEHICLES ================= -->
+    <div class="tab-view active" id="view-vehicles">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div>
+          <h2 style="font-family: var(--font-head); font-size: 1.4rem;">Araç Kataloğu (Taksi &amp; Lojistik)</h2>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Fiyatları, saatlik kira getirilerini ve bakım maliyetlerini doğrudan düzenle.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="addNewVehicle()">+ Yeni Araç Ekle</button>
+      </div>
+
+      <div class="items-grid" id="vehicles-container"></div>
+    </div>
+
+    <!-- ================= TAB 2: REAL ESTATE ================= -->
+    <div class="tab-view" id="view-realestate">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div>
+          <h2 style="font-family: var(--font-head); font-size: 1.4rem;">Gayrimenkul Kataloğu (20 Mülk)</h2>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Daire, AVM ve İş Merkezlerinin taban fiyatlarını ve saatlik kiralarını düzenle.</p>
+        </div>
+      </div>
+
+      <div class="items-grid" id="realestate-container"></div>
+    </div>
+
+    <!-- ================= TAB 3: STOCKS ================= -->
+    <div class="tab-view" id="view-stocks">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div>
+          <h2 style="font-family: var(--font-head); font-size: 1.4rem;">Borsa Hisseleri &amp; Temettü Oranları</h2>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Hisselerin başlangıç fiyatlarını, sektörlerini ve saatlik temettü oranlarını ayarla.</p>
+        </div>
+      </div>
+
+      <div class="items-grid" id="stocks-container"></div>
+    </div>
+
+    <!-- ================= TAB 4: PROMOS ================= -->
+    <div class="tab-view" id="view-promos">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div>
+          <h2 style="font-family: var(--font-head); font-size: 1.4rem;">Promosyon Kodları &amp; Ödüller</h2>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Oyuncuların Profil ekranında girebileceği hediye kodlarını yönet.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="addNewPromo()">+ Yeni Kod Ekle</button>
+      </div>
+
+      <div class="items-grid" id="promos-container"></div>
+    </div>
+
+    <!-- ================= TAB 5: EXPORT ================= -->
+    <div class="tab-view" id="view-export">
+      <h2 style="font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 8px;">Dışa Aktarma &amp; Kod Üretici</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+        Düzenlediğin verileri doğrudan kopyalayarak projenin <code>src/data/taxiData.js</code> veya <code>src/data/realEstateData.js</code> dosyalarına yapıştırabilirsin.
+      </p>
+
+      <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+        <button class="btn btn-neon" onclick="generateExport('taxi')">taxiData.js Kodunu Üret</button>
+        <button class="btn btn-gold" onclick="generateExport('realestate')">realEstateData.js Kodunu Üret</button>
+        <button class="btn btn-secondary" onclick="generateExport('json')">Tam JSON Konfigürasyonu</button>
+      </div>
+
+      <div class="terminal-box" id="export-terminal">// Kod burada oluşturulacak...</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">✓ Değişiklikler tarayıcı hafızasına kaydedildi!</div>
+
+  <script>
+    // Initial Seed Data (mirrors exact in-game taxiData.js)
+    let gameData = {
+      vehicles: [
+        { id: "veh_01", name: "2024 Fiat Egea Sedan", class: "Ekonomi", cost: 15000, rent: 110, maxKm: 500000, maintenanceCost: 900 },
+        { id: "veh_02", name: "Renault Megane E-Tech", class: "Ekonomi", cost: 22000, rent: 180, maxKm: 450000, maintenanceCost: 1200 },
+        { id: "veh_03", name: "Skoda Superb", class: "Ekonomi", cost: 35000, rent: 290, maxKm: 400000, maintenanceCost: 1800 },
+        { id: "veh_04", name: "Toyota Camry Hybrid", class: "Ekonomi", cost: 42000, rent: 360, maxKm: 380000, maintenanceCost: 2200 },
+        { id: "veh_05", name: "VW Passat Elegance", class: "İşletme", cost: 65000, rent: 550, maxKm: 350000, maintenanceCost: 3500 },
+        { id: "veh_06", name: "Audi A6", class: "İşletme", cost: 85000, rent: 780, maxKm: 320000, maintenanceCost: 4800 },
+        { id: "veh_07", name: "BMW 5 Series", class: "İşletme", cost: 105000, rent: 980, maxKm: 300000, maintenanceCost: 5500 },
+        { id: "veh_08", name: "Mercedes E-Class", class: "İşletme", cost: 120000, rent: 1150, maxKm: 280000, maintenanceCost: 6500 },
+        { id: "veh_09", name: "Porsche Panamera", class: "VIP", cost: 210000, rent: 2200, maxKm: 250000, maintenanceCost: 12000 },
+        { id: "veh_10", name: "BMW 7 Series", class: "VIP", cost: 250000, rent: 2800, maxKm: 240000, maintenanceCost: 15000 },
+        { id: "veh_11", name: "Mercedes S-Class", class: "VIP", cost: 280000, rent: 3200, maxKm: 230000, maintenanceCost: 18000 },
+        { id: "veh_12", name: "Range Rover Autobiography", class: "VIP", cost: 320000, rent: 3800, maxKm: 220000, maintenanceCost: 20000 },
+        { id: "veh_13", name: "Bentley Flying Spur", class: "Sovereign", cost: 650000, rent: 8500, maxKm: 200000, maintenanceCost: 35000 },
+        { id: "veh_14", name: "Rolls Royce Ghost", class: "Sovereign", cost: 900000, rent: 12500, maxKm: 180000, maintenanceCost: 50000 },
+        { id: "veh_15", name: "Sovereign S1 Custom", class: "Sovereign", cost: 1500000, rent: 22000, maxKm: 150000, maintenanceCost: 100000 }
+      ],
+      realestate: [
+        { id: "re_apt_01", name: "Obsidian Sky Loft", city: "Istanbul", cost: 450000, rent: 1800, taxRate: 0.12 },
+        { id: "re_apt_02", name: "Marble Penthouse", city: "New York", cost: 1200000, rent: 5500, taxRate: 0.25 },
+        { id: "re_apt_05", name: "Azure Marina Flat", city: "Dubai", cost: 2500000, rent: 12000, taxRate: 0.05 },
+        { id: "re_apt_10", name: "Royal Monaco Suite", city: "Monte Carlo", cost: 8500000, rent: 45000, taxRate: 0.02 },
+        { id: "re_mall_01", name: "Neon District Mall", city: "Seoul", cost: 25000000, rent: 125000, taxRate: 0.15 },
+        { id: "re_mall_03", name: "The Sovereign Hub", city: "Dubai", cost: 85000000, rent: 480000, taxRate: 0.05 },
+        { id: "re_biz_01", name: "Fintech Tower 1", city: "Frankfurt", cost: 15000000, rent: 75000, taxRate: 0.22 },
+        { id: "re_biz_05", name: "Sovereign Wealth Tower", city: "Hong Kong", cost: 120000000, rent: 850000, taxRate: 0.15 }
+      ],
+      stocks: [
+        { id: "KHOC", name: "Koç Holding", country: "TR", price: 215.40, dividendYield: 0.052 },
+        { id: "APPL", name: "Apple Inc.", country: "ABD", price: 242.80, dividendYield: 0.015 },
+        { id: "MSFT", name: "Microsoft Corp.", country: "ABD", price: 448.20, dividendYield: 0.021 },
+        { id: "NVDA", name: "Nvidia Corp.", country: "ABD", price: 135.50, dividendYield: 0.008 },
+        { id: "TSLA", name: "Tesla Motors", country: "ABD", price: 218.90, dividendYield: 0.000 },
+        { id: "THYAO", name: "Türk Hava Yolları", country: "TR", price: 310.00, dividendYield: 0.045 }
+      ],
+      promos: [
+        { code: "erkam1m", reward: 1000000, maxUses: 1, active: true },
+        { code: "erkam5m", reward: 5000000, maxUses: 2, active: true },
+        { code: "erkam100m", reward: 100000000, maxUses: 1, active: true },
+        { code: "simsekvip", reward: 50000000, maxUses: 1, active: true }
+      ]
+    };
+
+    // Load from localStorage if present
+    const saved = localStorage.getItem("bb_game_config");
+    if (saved) {
+      try { gameData = JSON.parse(saved); } catch(e){}
+    }
+
+    function renderVehicles() {
+      const container = document.getElementById("vehicles-container");
+      container.innerHTML = "";
+      gameData.vehicles.forEach((v, index) => {
+        container.innerHTML += `
+          <div class="editor-card">
+            <div class="card-head">
+              <div>
+                <span class="card-id">${v.id} • ${v.class}</span>
+                <div class="card-name">${v.name}</div>
+              </div>
+              <button class="btn btn-danger" style="padding:4px 8px; font-size:0.75rem;" onclick="deleteVehicle(${index})">Sil</button>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Araç İsmi</label>
+              <input type="text" class="form-input" value="${v.name}" onchange="updateVehicle(${index}, 'name', this.value)">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Fiyat ($)</label>
+                <input type="number" class="form-input" value="${v.cost}" onchange="updateVehicle(${index}, 'cost', Number(this.value))">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Saatlik Getiri ($/h)</label>
+                <input type="number" class="form-input" value="${v.rent}" onchange="updateVehicle(${index}, 'rent', Number(this.value))">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Azami Km (Ömür)</label>
+                <input type="number" class="form-input" value="${v.maxKm}" onchange="updateVehicle(${index}, 'maxKm', Number(this.value))">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Bakım Maliyeti ($)</label>
+                <input type="number" class="form-input" value="${v.maintenanceCost}" onchange="updateVehicle(${index}, 'maintenanceCost', Number(this.value))">
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function renderRealEstate() {
+      const container = document.getElementById("realestate-container");
+      container.innerHTML = "";
+      gameData.realestate.forEach((re, index) => {
+        container.innerHTML += `
+          <div class="editor-card">
+            <div class="card-head">
+              <div>
+                <span class="card-id">${re.id} • ${re.city}</span>
+                <div class="card-name">${re.name}</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Fiyat ($)</label>
+                <input type="number" class="form-input" value="${re.cost}" onchange="gameData.realestate[${index}].cost = Number(this.value)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Saatlik Kira ($/h)</label>
+                <input type="number" class="form-input" value="${re.rent}" onchange="gameData.realestate[${index}].rent = Number(this.value)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vergi Oranı (0.10 = %10)</label>
+              <input type="number" step="0.01" class="form-input" value="${re.taxRate}" onchange="gameData.realestate[${index}].taxRate = Number(this.value)">
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function renderStocks() {
+      const container = document.getElementById("stocks-container");
+      container.innerHTML = "";
+      gameData.stocks.forEach((st, index) => {
+        container.innerHTML += `
+          <div class="editor-card">
+            <div class="card-head">
+              <div>
+                <span class="card-id">${st.country} Ticker</span>
+                <div class="card-name">${st.id} — ${st.name}</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Fiyat ($)</label>
+                <input type="number" step="0.01" class="form-input" value="${st.price}" onchange="gameData.stocks[${index}].price = Number(this.value)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Yıllık Temettü (0.05 = %5)</label>
+                <input type="number" step="0.001" class="form-input" value="${st.dividendYield}" onchange="gameData.stocks[${index}].dividendYield = Number(this.value)">
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function renderPromos() {
+      const container = document.getElementById("promos-container");
+      container.innerHTML = "";
+      gameData.promos.forEach((p, index) => {
+        container.innerHTML += `
+          <div class="editor-card">
+            <div class="card-head">
+              <div>
+                <span class="card-id">Hediye Promosyon Kodu</span>
+                <div class="card-name" style="font-family:var(--font-mono); color:var(--neon);">${p.code}</div>
+              </div>
+              <button class="btn btn-danger" style="padding:4px 8px; font-size:0.75rem;" onclick="gameData.promos.splice(${index},1); renderPromos();">Sil</button>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Nakit Ödül ($)</label>
+                <input type="number" class="form-input" value="${p.reward}" onchange="gameData.promos[${index}].reward = Number(this.value)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Azami Kullanım Sayısı</label>
+                <input type="number" class="form-input" value="${p.maxUses}" onchange="gameData.promos[${index}].maxUses = Number(this.value)">
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function updateVehicle(index, field, value) {
+      gameData.vehicles[index][field] = value;
+    }
+
+    function deleteVehicle(index) {
+      if (confirm("Bu aracı silmek istediğine emin misin?")) {
+        gameData.vehicles.splice(index, 1);
+        renderVehicles();
+      }
+    }
+
+    function addNewVehicle() {
+      const newId = "veh_" + String(gameData.vehicles.length + 1).padStart(2, "0");
+      gameData.vehicles.push({
+        id: newId,
+        name: "Yeni Özel Araç Modeli",
+        class: "VIP",
+        cost: 200000,
+        rent: 2000,
+        maxKm: 250000,
+        maintenanceCost: 10000
+      });
+      renderVehicles();
+    }
+
+    function addNewPromo() {
+      const code = prompt("Yeni promosyon kodunu girin (örn: vip2026):");
+      if (code) {
+        gameData.promos.push({
+          code: code.trim().toLowerCase(),
+          reward: 10000000,
+          maxUses: 1,
+          active: true
+        });
+        renderPromos();
+      }
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-view").forEach(v => v.classList.remove("active"));
+      event.currentTarget.classList.add("active");
+      document.getElementById("view-" + tabId).classList.add("active");
+    }
+
+    function saveToLocalStorage() {
+      localStorage.setItem("bb_game_config", JSON.stringify(gameData));
+      showToast("✓ Değişiklikler tarayıcıya kaydedildi!");
+    }
+
+    function exportJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(gameData, null, 2));
+      const downloadAnchor = document.createElement("a");
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "business_bank_game_config.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast("✓ game_config.json dosyası indirildi!");
+    }
+
+    function exportJSCode() {
+      switchTab('export');
+      generateExport('taxi');
+    }
+
+    function generateExport(type) {
+      const terminal = document.getElementById("export-terminal");
+      if (type === 'taxi') {
+        terminal.textContent = `export const TAXI_VEHICLE_CATALOG = ${JSON.stringify(gameData.vehicles, null, 2)};`;
+      } else if (type === 'realestate') {
+        terminal.textContent = `export const REAL_ESTATE_LIST = ${JSON.stringify(gameData.realestate, null, 2)};`;
+      } else {
+        terminal.textContent = JSON.stringify(gameData, null, 2);
+      }
+      showToast("✓ Kod terminale aktarıldı!");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.style.display = "block";
+      setTimeout(() => { toast.style.display = "none"; }, 3000);
+    }
+
+    // Initial Render
+    renderVehicles();
+    renderRealEstate();
+    renderStocks();
+    renderPromos();
+  </script>
+</body>
+</html>
